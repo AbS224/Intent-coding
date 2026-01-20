@@ -1,10 +1,11 @@
 # Research & Publications
 ## Academic Foundation for Crucible Engine
 
-**Author**: AbS224  
-**ORCID**: [0000-0000-0000-0000](https://orcid.org/0000-0000-0000-0000) *(Update with your actual ORCID)*  
+**Author**: Adam B. Straughn  
+**ORCID**: [0009-0007-5495-0895](https://orcid.org/0009-0007-5495-0895)  
 **Website**: [verifiableproof.systems](https://verifiableproof.systems)  
 **Institution**: Independent Researcher  
+**Location**: Oregon, United States  
 
 ---
 
@@ -32,29 +33,34 @@
 ### 2024
 
 **"Vibecoding: From Natural Language to Formally Verified Code"**  
-*AbS224*  
+*Adam B. Straughn*  
 *Preprint available at: [verifiableproof.systems/papers/vibecoding-2024.pdf]*  
 **Abstract**: This paper introduces the concept of "vibecoding" - a methodology for transforming informal, natural language requirements into formally verified, production-ready code through a multi-stage AI-assisted verification pipeline. We present the Crucible Engine architecture and demonstrate its effectiveness on safety-critical system specifications.
 
 **"Multi-Agent Adversarial Verification for AI-Generated Code"**  
-*AbS224*  
+*Adam B. Straughn*  
 *Preprint available at: [verifiableproof.systems/papers/thunderdome-2024.pdf]*  
 **Abstract**: We propose a novel approach to verifying AI-generated code using adversarial multi-agent systems. The "Thunderdome" architecture employs competing AI agents to identify logical flaws and security vulnerabilities in automatically generated specifications and implementations.
 
 **"Post-Quantum Audit Trails for Formal Verification Systems"**  
-*AbS224*  
+*Adam B. Straughn*  
 *Preprint available at: [verifiableproof.systems/papers/pq-audit-2024.pdf]*  
 **Abstract**: This work presents a framework for creating tamper-evident, quantum-resistant audit trails for formal verification processes. We demonstrate the integration of ML-KEM and ML-DSA signatures with immutable verification records for regulatory compliance.
+
+**"Verifiable Proof Systems and the Mitigation of Narrative-Driven AI Perception Gaps"**  
+*Adam B. Straughn*  
+*Preprint available at: [verifiableproof.systems/papers/ai-perception-gaps-2024.pdf]*  
+**Abstract**: This research demonstrates that AI adoption barriers in regulated industries stem primarily from perception gaps rooted in science fiction narratives and linguistic ambiguity. Through a 100-participant study, we show that verifiable proof systems increase perceived reliability by 34%, reduce decision time by 22%, and improve comprehension accuracy by 18%.
 
 ### 2023
 
 **"Intent-AST: A Formal Representation for Natural Language Requirements"**  
-*AbS224*  
+*Adam B. Straughn*  
 *Preprint available at: [verifiableproof.systems/papers/intent-ast-2023.pdf]*  
 **Abstract**: We introduce Intent-AST, a formal abstract syntax tree representation for capturing the semantic content of natural language system requirements. This representation enables automated dependency analysis, gap detection, and formal verification of system specifications.
 
 **"Tree-Sitter Grammars for Requirement Engineering"**  
-*AbS224*  
+*Adam B. Straughn*  
 *Preprint available at: [verifiableproof.systems/papers/treesitter-req-2023.pdf]*  
 **Abstract**: This paper presents specialized Tree-Sitter grammars for parsing and analyzing natural language requirements in software engineering contexts. We demonstrate improved accuracy in requirement extraction and structural analysis compared to traditional NLP approaches.
 
@@ -172,7 +178,7 @@
 ### BibTeX Entry for Crucible Engine
 ```bibtex
 @software{crucible_engine_2024,
-  author = {AbS224},
+  author = {Adam B. Straughn},
   title = {Crucible Engine: Correct by Design, Not by Debugging},
   year = {2024},
   url = {https://github.com/AbS224/Intent-coding},
@@ -182,20 +188,20 @@
 
 ### How to Cite This Work
 **APA Style**:  
-AbS224. (2024). Crucible Engine: Correct by Design, Not by Debugging [Computer software]. https://github.com/AbS224/Intent-coding
+Straughn, A. B. (2024). Crucible Engine: Correct by Design, Not by Debugging [Computer software]. https://github.com/AbS224/Intent-coding
 
 **IEEE Style**:  
-AbS224, "Crucible Engine: Correct by Design, Not by Debugging," 2024. [Online]. Available: https://github.com/AbS224/Intent-coding
+A. B. Straughn, "Crucible Engine: Correct by Design, Not by Debugging," 2024. [Online]. Available: https://github.com/AbS224/Intent-coding
 
 ---
 
 ## Contact Information
 
-- **Email**: abs224@users.noreply.github.com
-- **ORCID**: [0000-0000-0000-0000](https://orcid.org/0000-0000-0000-0000)
+- **Email**: Adam@verifiableproof.systems
+- **ORCID**: [0009-0007-5495-0895](https://orcid.org/0009-0007-5495-0895)
 - **Website**: [verifiableproof.systems](https://verifiableproof.systems)
 - **GitHub**: [@AbS224](https://github.com/AbS224)
-- **LinkedIn**: [Professional Profile](https://linkedin.com/in/abs224)
+- **Location**: Oregon, United States
 
 ---
 
