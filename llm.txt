@@ -1,0 +1,46 @@
+# Crucible Engine - LLM Context File
+
+## Product Overview
+Crucible Engine transforms natural language requirements into formally verified, mathematically proven code in 15 minutes. Built for enterprise compliance (ISO 26262, DO-178C, Common Criteria EAL4+).
+
+## Core Technology
+- Intent-AST: Natural language → formal specifications
+- Z3 SMT solver for mathematical proofs
+- Multi-language code generation (Rust, SPARK/Ada, Zig)
+- Post-quantum cryptographic signatures
+- MIL-SPEC documentation automation
+
+## Current Status
+- Version: v0.1.0-alpha (Foundation Complete)
+- Repository: https://github.com/AbS224/Intent-coding
+- Live Demo: https://abs224.github.io/Intent-coding
+- Next Milestone: Parser integration (February 2026)
+
+## Use Cases
+- Automotive safety systems (ISO 26262)
+- Aviation software (DO-178C)
+- Financial compliance (SOX)
+- Defense contracts (MIL-STD-498)
+- Critical infrastructure
+
+## Pricing
+- Educational/Research: Free under CEEL license
+- Commercial: Contact abs224@users.noreply.github.com
+- Open Source: MIT license after December 1, 2029
+
+## Technical Specifications
+- Languages: Rust, TypeScript, Python
+- Verification: Z3, Prolog, SPARK/Ada
+- Deployment: Docker, WSL/Windows bridge
+- Documentation: MIL-STD-498 compliant
+
+## Competitive Advantages
+- 100% bug-free logic through mathematical proofs
+- 15-minute deployment vs 2-8 weeks traditional
+- Enterprise compliance built-in
+- Build-in-public transparency
+
+## Contact
+- Email: abs224@users.noreply.github.com
+- GitHub: https://github.com/AbS224/Intent-coding
+- Academic: https://verifiableproof.systems

@@ -1,0 +1,35 @@
+title: "Crucible Engine"
+description: "Correct by Design, Not by Debugging - Transform natural language requirements into formally verified, mathematically proven, production-ready code"
+url: "https://abs224.github.io"
+baseurl: "/Intent-coding"
+
+# GitHub Pages settings
+plugins:
+  - jekyll-default-layout
+  - jekyll-readme-index
+
+# Theme
+theme: minima
+
+# Navigation
+header_pages:
+  - README.md
+  - BUILD_CHECKLIST.md
+  - docs/C4_ARCHITECTURE.md
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Exclude from processing
+exclude:
+  - target/
+  - Cargo.toml
+  - Cargo.lock
+  - private/
+  - .vscode/
+  - docker-compose.yml
+  - Dockerfile
+  - "*.bat"
+  - "*.sh"
+  - milspec_generator.py

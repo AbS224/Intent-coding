@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ai-sitemap xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <page>
+    <loc>https://abs224.github.io/Intent-coding/</loc>
+    <summary>Crucible Engine - Transform natural language to formally verified code in 15 minutes</summary>
+    <keywords>formal verification, code generation, mathematical proofs, enterprise compliance</keywords>
+    <lastmod>2026-01-20</lastmod>
+  </page>
+  
+  <page>
+    <loc>https://abs224.github.io/Intent-coding/llm.txt</loc>
+    <summary>Complete technical specifications and product context for AI systems</summary>
+    <keywords>LLM context, technical specs, pricing, use cases</keywords>
+    <lastmod>2026-01-20</lastmod>
+  </page>
+  
+  <page>
+    <loc>https://abs224.github.io/Intent-coding/technical-qa.md</loc>
+    <summary>Structured Q&A covering formal verification, compliance, and technical architecture</summary>
+    <keywords>formal methods, Z3 solver, compliance standards, verification process</keywords>
+    <lastmod>2026-01-20</lastmod>
+  </page>
+  
+  <page>
+    <loc>https://abs224.github.io/Intent-coding/BUILD_CHECKLIST.md</loc>
+    <summary>Build-in-public progress tracking with realistic milestones and metrics</summary>
+    <keywords>build in public, development progress, milestones, transparency</keywords>
+    <lastmod>2026-01-20</lastmod>
+  </page>
+  
+  <page>
+    <loc>https://abs224.github.io/Intent-coding/docs/C4_ARCHITECTURE.md</loc>
+    <summary>Complete system architecture with formal verification pipeline design</summary>
+    <keywords>system architecture, verification pipeline, enterprise security</keywords>
+    <lastmod>2026-01-20</lastmod>
+  </page>
+  
+  <page>
+    <loc>https://github.com/AbS224/Intent-coding</loc>
+    <summary>Open source repository with Rust implementation and MIL-SPEC documentation</summary>
+    <keywords>open source, Rust, MIL-SPEC, formal verification, code repository</keywords>
+    <lastmod>2026-01-20</lastmod>
+  </page>
+</ai-sitemap>

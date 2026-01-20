@@ -9,9 +9,9 @@ private/
 
 # Website Development
 website/
-*.html
-*.css
-*.js
+# *.html  # Allow index.html for GitHub Pages
+# *.css   # Allow CSS for GitHub Pages
+# *.js    # Allow JS for GitHub Pages
 deployment.md
 
 # Rust
