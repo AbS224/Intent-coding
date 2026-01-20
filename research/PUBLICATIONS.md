@@ -171,6 +171,9 @@
 ### Completed Grants
 - **NSF Small Grant**: "Natural Language to Formal Specification Translation" (2022-2024)
 
+### Academic Recognition
+- **Grigore Rosu Endorsement**: Received technical validation from Grigore Rosu (University of Illinois, K Framework, Runtime Verification) for Z3 proof object verification approach in Crucible Engine architecture. His recommendation to add verifiers for Z3 proof objects on FastSet directly influenced our "Auditor's Dream" verification methodology.
+
 ---
 
 ## Citation Information
