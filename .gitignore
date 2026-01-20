@@ -7,6 +7,13 @@ private/
 *.spec
 *.confidential
 
+# Website Development
+website/
+*.html
+*.css
+*.js
+deployment.md
+
 # Rust
 /target/
 **/*.rs.bk
