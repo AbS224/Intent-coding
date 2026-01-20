@@ -14,13 +14,28 @@ if [[ ! -f /proc/version ]] || ! grep -qi microsoft /proc/version 2>/dev/null; t
     fi
 fi
 
-PROJECT_ROOT="/mnt/l/FinalTry"
-cd "$PROJECT_ROOT"
+# Dynamic project root detection with validation
+PROJECT_ROOT="${PROJECT_ROOT:-/mnt/l/FinalTry}"
+if [[ ! -d "$PROJECT_ROOT" ]]; then
+    echo "❌ Project directory not found: $PROJECT_ROOT"
+    echo "💡 Set PROJECT_ROOT environment variable or ensure /mnt/l/FinalTry exists"
+    exit 1
+fi
+
+cd "$PROJECT_ROOT" || {
+    echo "❌ Failed to change to project directory: $PROJECT_ROOT"
+    exit 1
+}
 
 echo "📍 Working directory: $(pwd)"
 
-# Update system packages
+# Update system packages with sudo check
 echo "📦 Updating system packages..."
+if ! sudo -n true 2>/dev/null; then
+    echo "❌ This script requires sudo privileges"
+    echo "💡 Run 'sudo -v' first or ensure your user has sudo access"
+    exit 1
+fi
 sudo apt update -qq
 
 # Install essential development tools
@@ -83,8 +98,15 @@ cat > wsl-dev.sh << 'EOF'
 #!/bin/bash
 # WSL Development Helper Script
 
-PROJECT_ROOT="/mnt/l/FinalTry"
-cd "$PROJECT_ROOT"
+# shellcheck source=/dev/null
+source "${HOME}/.cargo/env" 2>/dev/null || true
+
+PROJECT_ROOT="${PROJECT_ROOT:-/mnt/l/FinalTry}"
+if [[ ! -d "$PROJECT_ROOT" ]]; then
+    echo "❌ Project directory not found: $PROJECT_ROOT"
+    exit 1
+fi
+cd "$PROJECT_ROOT" || exit 1
 
 case "$1" in
     "build")
@@ -119,6 +141,8 @@ case "$1" in
         echo "  Z3: $(z3 --version 2>/dev/null || echo 'Not installed')"
         echo "  Tree-sitter: $(tree-sitter --version 2>/dev/null || echo 'Not installed')"
         echo "  Python: $(python3 --version 2>/dev/null || echo 'Not installed')"
+        echo "  Project Root: $PROJECT_ROOT"
+        echo "  Current Dir: $(pwd)"
         ;;
     "clean")
         echo "🧹 Cleaning build artifacts..."

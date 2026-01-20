@@ -8,27 +8,61 @@ import os
 import sys
 import json
 import datetime
+import html
 from pathlib import Path
 from typing import Dict, List, Optional
+from werkzeug.utils import secure_filename
 
 class MilSpecDocGenerator:
     def __init__(self, project_root: str):
-        self.project_root = Path(project_root)
-        self.docs_dir = self.project_root / "docs"
-        self.templates_dir = self.docs_dir / "templates"
-        self.active_dir = self.docs_dir / "active"
+        # Validate and sanitize project root path
+        self.project_root = self._safe_path_join(Path.cwd(), project_root)
+        self.docs_dir = self._safe_path_join(self.project_root, "docs")
+        self.templates_dir = self._safe_path_join(self.docs_dir, "templates")
+        self.active_dir = self._safe_path_join(self.docs_dir, "active")
         
         # Ensure directories exist
-        self.docs_dir.mkdir(exist_ok=True)
-        self.templates_dir.mkdir(exist_ok=True)
-        self.active_dir.mkdir(exist_ok=True)
+        try:
+            self.docs_dir.mkdir(exist_ok=True)
+            self.templates_dir.mkdir(exist_ok=True)
+            self.active_dir.mkdir(exist_ok=True)
+        except OSError as e:
+            raise ValueError(f"Failed to create directories: {e}")
         
-        # Current date for document IDs
-        self.current_date = datetime.datetime.now().strftime("%Y%m%d")
+        # Current date for document IDs (timezone-aware)
+        self.current_date = datetime.datetime.now(datetime.timezone.utc)
+        
+    def _safe_path_join(self, base_path: Path, *paths: str) -> Path:
+        """Safely join paths and prevent directory traversal"""
+        result = base_path
+        for path in paths:
+            # Sanitize each path component
+            clean_path = secure_filename(str(path))
+            if not clean_path or clean_path in ('.', '..'):
+                raise ValueError(f"Invalid path component: {path}")
+            result = result / clean_path
+        
+        # Ensure result is within base_path
+        try:
+            result.resolve().relative_to(base_path.resolve())
+        except ValueError:
+            raise ValueError(f"Path traversal attempt detected: {result}")
+        
+        return result
+    
+    def _sanitize_input(self, text: str) -> str:
+        """Sanitize user input to prevent XSS"""
+        if not isinstance(text, str):
+            raise ValueError("Input must be a string")
+        return html.escape(text.strip())
         
     def generate_document_id(self, doc_type: str, version: str = "1.0") -> str:
         """Generate MIL-SPEC compliant document ID"""
-        return f"CRU-{doc_type}-{version}-{self.current_date}"
+        # Sanitize inputs
+        clean_doc_type = self._sanitize_input(doc_type)
+        clean_version = self._sanitize_input(version)
+        date_str = self.current_date.strftime("%Y%m%d")
+        return f"CRU-{clean_doc_type}-{clean_version}-{date_str}"
     
     def create_document_header(self, title: str, doc_type: str, classification: str = "CONTROLLED") -> str:
         """Create standard MIL-SPEC document header"""
@@ -400,14 +434,25 @@ The Crucible Engine implements a four-layer verification pipeline:
         self.write_document("TPD", content)
     
     def write_document(self, doc_type: str, content: str) -> None:
-        """Write document to file"""
-        filename = f"{doc_type}_{self.current_date}.md"
-        filepath = self.active_dir / filename
-        
-        with open(filepath, 'w', encoding='utf-8') as f:
-            f.write(content)
-        
-        print(f"[GENERATED] Generated: {filepath}")
+        """Write document to file with proper error handling"""
+        try:
+            # Sanitize inputs
+            clean_doc_type = self._sanitize_input(doc_type)
+            
+            # Create safe filename
+            date_str = self.current_date.strftime("%Y%m%d")
+            filename = f"{clean_doc_type}_{date_str}.md"
+            filepath = self._safe_path_join(self.active_dir, filename)
+            
+            # Write file with proper encoding and error handling
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(content)
+            
+            print(f"[GENERATED] Generated: {filepath}")
+            
+        except (OSError, IOError, ValueError) as e:
+            print(f"[ERROR] Failed to write document {doc_type}: {e}")
+            raise
     
     def check_compliance(self) -> Dict[str, bool]:
         """Check MIL-SPEC compliance status"""
@@ -434,16 +479,25 @@ The Crucible Engine implements a four-layer verification pipeline:
         return compliance_status
     
     def generate_all_documents(self) -> None:
-        """Generate all required MIL-SPEC documents"""
+        """Generate all required MIL-SPEC documents with error handling"""
         print("[GENERATOR] Generating MIL-SPEC Documentation Suite...")
-        print(f"[DATE] Date: {datetime.datetime.now().strftime('%Y-%m-%d')}")
+        print(f"[DATE] Date: {self.current_date.strftime('%Y-%m-%d')}")
         print(f"[OUTPUT] Output Directory: {self.active_dir}")
         print()
         
-        self.generate_srd()
-        self.generate_sdd()
-        self.generate_secd()
-        self.generate_tpd()
+        documents = [
+            ("SRD", self.generate_srd),
+            ("SDD", self.generate_sdd),
+            ("SECD", self.generate_secd),
+            ("TPD", self.generate_tpd)
+        ]
+        
+        for doc_name, doc_func in documents:
+            try:
+                doc_func()
+            except Exception as e:
+                print(f"[ERROR] Failed to generate {doc_name}: {e}")
+                continue
         
         print()
         print("📊 Compliance Check:")
@@ -472,25 +526,30 @@ def main():
         print("  tpd      - Generate Test Plan Document only")
         return
     
-    project_root = os.path.dirname(os.path.abspath(__file__))
-    generator = MilSpecDocGenerator(project_root)
-    
-    command = sys.argv[1].lower()
-    
-    if command == "generate":
-        generator.generate_all_documents()
-    elif command == "check":
-        generator.check_compliance()
-    elif command == "srd":
-        generator.generate_srd()
-    elif command == "sdd":
-        generator.generate_sdd()
-    elif command == "secd":
-        generator.generate_secd()
-    elif command == "tpd":
-        generator.generate_tpd()
-    else:
-        print(f"Unknown command: {command}")
+    try:
+        project_root = os.path.dirname(os.path.abspath(__file__))
+        generator = MilSpecDocGenerator(project_root)
+        
+        command = sys.argv[1].lower()
+        
+        if command == "generate":
+            generator.generate_all_documents()
+        elif command == "check":
+            generator.check_compliance()
+        elif command == "srd":
+            generator.generate_srd()
+        elif command == "sdd":
+            generator.generate_sdd()
+        elif command == "secd":
+            generator.generate_secd()
+        elif command == "tpd":
+            generator.generate_tpd()
+        else:
+            print(f"Unknown command: {command}")
+            
+    except Exception as e:
+        print(f"[FATAL ERROR] {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

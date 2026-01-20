@@ -15,8 +15,12 @@ fi
 echo ""
 echo "📁 Path Information:"
 echo "  Current directory: $(pwd)"
-echo "  Windows path: $(wslpath -w $(pwd) 2>/dev/null || echo 'N/A')"
-echo "  Linux path: $(wslpath -u 'L:\FinalTry' 2>/dev/null || echo 'N/A')"
+echo "  Windows path: $(wslpath -w "$(pwd)" 2>/dev/null || echo 'N/A')"
+# Dynamic path detection instead of hardcoded paths
+WIN_PROJECT_PATH="${WIN_PROJECT_PATH:-L:\\FinalTry}"
+LINUX_PROJECT_PATH="${LINUX_PROJECT_PATH:-/mnt/l/FinalTry}"
+echo "  Linux path: $(wslpath -u "$WIN_PROJECT_PATH" 2>/dev/null || echo 'N/A')"
+echo "  Project paths: Windows=$WIN_PROJECT_PATH, Linux=$LINUX_PROJECT_PATH"
 
 echo ""
 echo "🛠️ Development Tools:"
@@ -42,10 +46,16 @@ echo "🔍 Common Issues Check:"
 if command -v file &> /dev/null; then
     if file setup-wsl.sh 2>/dev/null | grep -q "CRLF"; then
         echo "  ⚠️  CRLF line endings detected in shell scripts"
-        echo "     Fix: Run 'dos2unix *.sh' or change to LF in VS Code"
+        if command -v dos2unix &> /dev/null; then
+            echo "     Fix: Run 'dos2unix *.sh'"
+        else
+            echo "     Fix: Install dos2unix (sudo apt install dos2unix) or change to LF in VS Code"
+        fi
     else
         echo "  ✅ Line endings OK"
     fi
+else
+    echo "  ⚠️  'file' command not available - cannot check line endings"
 fi
 
 # Check file permissions
@@ -58,12 +68,17 @@ if [ -f "setup-wsl.sh" ]; then
     fi
 fi
 
-# Check for file locks
-if lsof /mnt/l/FinalTry 2>/dev/null | grep -q .; then
-    echo "  ⚠️  Files may be locked by Windows processes"
-    echo "     Fix: Close VS Code and run 'wsl --shutdown'"
+# Check for file locks with availability check
+if command -v lsof &> /dev/null; then
+    if lsof "$LINUX_PROJECT_PATH" 2>/dev/null | grep -q .; then
+        echo "  ⚠️  Files may be locked by Windows processes"
+        echo "     Fix: Close VS Code and run 'wsl --shutdown'"
+    else
+        echo "  ✅ No file locks detected"
+    fi
 else
-    echo "  ✅ No file locks detected"
+    echo "  ⚠️  lsof not available - cannot check file locks"
+    echo "     Install: sudo apt install lsof"
 fi
 
 echo ""
