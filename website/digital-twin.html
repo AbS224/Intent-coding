@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam B. Straughn - Verifiable Proof Systems</title>
+    <meta name="description" content="Digital Twin Portfolio - Deterministic Assurance through Bicameral AI Architecture">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff41;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Starfield Background */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        
+        /* Particle System */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00ff41;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00ff41;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px #00ff41;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00ff41; }
+            to { text-shadow: 0 0 30px #00ff41, 0 0 40px #00ff41; }
+        }
+        
+        .tagline {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #00cc33;
+        }
+        
+        .subtitle {
+            font-size: 0.9em;
+            color: #888;
+        }
+        
+        /* Pillar Sections */
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .pillar {
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #00ff41;
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .pillar:hover {
+            border-color: #00cc33;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .pillar h3 {
+            color: #00ff41;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .pillar-content {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .pillar-logic {
+            font-style: italic;
+            color: #00cc33;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+        }
+        
+        /* Evidence Blocks */
+        .evidence-block {
+            background: rgba(0, 50, 0, 0.8);
+            border-left: 4px solid #00ff41;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .evidence-block h4 {
+            color: #00ff41;
+            margin-bottom: 10px;
+        }
+        
+        .evidence-link {
+            color: #00cc33;
+            text-decoration: none;
+            border-bottom: 1px dotted #00cc33;
+        }
+        
+        .evidence-link:hover {
+            color: #00ff41;
+            border-bottom-color: #00ff41;
+        }
+        
+        /* Audit Clipboard */
+        .audit-clipboard {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #00ff41;
+            padding: 15px;
+            font-size: 0.8em;
+            max-width: 200px;
+            z-index: 100;
+        }
+        
+        .audit-clipboard h5 {
+            color: #00ff41;
+            margin-bottom: 10px;
+        }
+        
+        .invariant {
+            color: #00cc33;
+            margin: 5px 0;
+        }
+        
+        .invariant::before {
+            content: "✓ ";
+            color: #00ff41;
+        }
+        
+        /* AI Twin Interface */
+        .ai-twin {
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #00ff41;
+            padding: 30px;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .ai-twin h3 {
+            color: #00ff41;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .twin-input {
+            width: 100%;
+            background: rgba(0, 50, 0, 0.8);
+            border: 1px solid #00cc33;
+            color: #00ff41;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 15px;
+            resize: vertical;
+        }
+        
+        .twin-button {
+            background: transparent;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+        }
+        
+        .twin-button:hover {
+            background: #00ff41;
+            color: #000;
+        }
+        
+        .twin-response {
+            background: rgba(0, 50, 0, 0.6);
+            border-left: 4px solid #00cc33;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 100px;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+        
+        /* Publications Grid */
+        .publications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .publication {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .publication:hover {
+            border-color: #00ff41;
+        }
+        
+        .publication h4 {
+            color: #00ff41;
+            margin-bottom: 10px;
+        }
+        
+        .publication .author {
+            color: #00cc33;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .publication .abstract {
+            color: #ccc;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid #333;
+            margin-top: 60px;
+            color: #666;
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            border-top-color: #00ff41;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .audit-clipboard {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 20px 0;
+                max-width: 100%;
+            }
+            
+            .pillar-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Starfield Background -->
+    <canvas id="starfield"></canvas>
+    
+    <!-- Particle System -->
+    <div id="particles"></div>
+    
+    <!-- Audit Clipboard -->
+    <div class="audit-clipboard">
+        <h5>System Invariants</h5>
+        <div class="invariant">Deterministic Assurance</div>
+        <div class="invariant">Bicameral Verification</div>
+        <div class="invariant">Post-Quantum Security</div>
+        <div class="invariant">Adversarial Testing</div>
+        <div class="invariant">Formal Proof Chain</div>
+    </div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Adam B. Straughn</h1>
+            <div class="tagline">"Correct by Design, Not by Debugging"</div>
+            <div class="subtitle">Digital Twin Portfolio - Verifiable Proof Systems</div>
+            <div class="subtitle">Oregon, United States | ORCID: 0009-0007-5495-0895</div>
+        </header>
+        
+        <!-- Four Pillars Architecture -->
+        <section class="pillar-grid">
+            <div class="pillar">
+                <h3>Pillar 1: HITL 2.0</h3>
+                <div class="pillar-content">
+                    The "Consultation Protocol" preventing unilateral AI action through human-in-the-loop verification gates.
+                </div>
+                <div class="pillar-logic">
+                    <strong>Epistemic Plurality</strong> - Safety as governance, not automation
+                </div>
+            </div>
+            
+            <div class="pillar">
+                <h3>Pillar 2: Safety Kernel</h3>
+                <div class="pillar-content">
+                    Five-pillar architecture ensuring deterministic AI assurance through mathematical verification.
+                </div>
+                <div class="pillar-logic">
+                    <strong>AND-gate Logic</strong> - No code execution without total verification
+                </div>
+            </div>
+            
+            <div class="pillar">
+                <h3>Pillar 3: ANNIE</h3>
+                <div class="pillar-content">
+                    Agentic Neural Network for Intent Engineering with bicameral synthesis architecture.
+                </div>
+                <div class="pillar-logic">
+                    <strong>Bicameral Synthesis</strong> - Heuristic search gated by formal proof
+                </div>
+            </div>
+            
+            <div class="pillar">
+                <h3>Pillar 4: Crucible</h3>
+                <div class="pillar-content">
+                    The "Thunderdome" adversarial verification system for vibecoding with mathematical guarantees.
+                </div>
+                <div class="pillar-logic">
+                    <strong>Adversarial Verification</strong> - Mechanical auditor for code correctness
+                </div>
+            </div>
+        </section>
+        
+        <!-- Verifiable Evidence Blocks -->
+        <section class="evidence-block">
+            <h4>Z3 SMT Solver Traces</h4>
+            <p>Mathematical proof traces from ANNIE verification pipeline:</p>
+            <a href="#" class="evidence-link">solver-trace-001.smt2</a> |
+            <a href="#" class="evidence-link">invariant-proof-chain.z3</a> |
+            <a href="#" class="evidence-link">safety-kernel-verification.log</a>
+        </section>
+        
+        <section class="evidence-block">
+            <h4>Unified Proof Certificate (UPC)</h4>
+            <p>Post-quantum ML-DSA signed verification manifest:</p>
+            <a href="#" class="evidence-link">upc-manifest-2024-12.json</a> |
+            <a href="#" class="evidence-link">ml-dsa-signature.pem</a> |
+            <a href="#" class="evidence-link">quantum-resistant-audit-trail.log</a>
+        </section>
+        
+        <!-- AI Twin Interface -->
+        <section class="ai-twin">
+            <h3>Digital Twin - AURA Cognitive Core</h3>
+            <textarea class="twin-input" placeholder="Ask about my research philosophy, technical approach, or the journey from physical infrastructure auditor to AI safety engineer..."></textarea>
+            <button class="twin-button" onclick="queryTwin()">Query Digital Twin</button>
+            <div class="twin-response" id="twinResponse">
+                Digital Twin initialized. Ready to discuss verifiable proof systems, formal verification, and the transition from "vibe coding" to deterministic assurance...
+            </div>
+        </section>
+        
+        <!-- Publications -->
+        <section class="publications">
+            <div class="publication">
+                <h4>Verifiable Proof Systems and AI Perception Gaps</h4>
+                <div class="author">Adam B. Straughn, 2024</div>
+                <div class="abstract">
+                    Demonstrates that AI adoption barriers stem from perception gaps rooted in science fiction narratives. 
+                    100-participant study shows verifiable proofs increase reliability perception by 34%.
+                </div>
+            </div>
+            
+            <div class="publication">
+                <h4>Vibecoding: Natural Language to Verified Code</h4>
+                <div class="author">Adam B. Straughn, 2024</div>
+                <div class="abstract">
+                    Introduces "vibecoding" methodology for transforming informal requirements into formally verified, 
+                    production-ready code through multi-stage AI-assisted verification pipeline.
+                </div>
+            </div>
+            
+            <div class="publication">
+                <h4>Multi-Agent Adversarial Verification</h4>
+                <div class="author">Adam B. Straughn, 2024</div>
+                <div class="abstract">
+                    Novel approach using adversarial multi-agent systems. "Thunderdome" architecture employs 
+                    competing AI agents to identify logical flaws and security vulnerabilities.
+                </div>
+            </div>
+            
+            <div class="publication">
+                <h4>Post-Quantum Audit Trails</h4>
+                <div class="author">Adam B. Straughn, 2024</div>
+                <div class="abstract">
+                    Framework for tamper-evident, quantum-resistant audit trails. Integration of ML-KEM and ML-DSA 
+                    signatures with immutable verification records for regulatory compliance.
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Adam B. Straughn - Verifiable Proof Systems</p>
+            <p>Hosted on Cloudflare | Powered by WebLLM | Post-Quantum Secured</p>
+        </footer>
+    </div>
+    
+    <!-- Audio Context for Deterministic Signal -->
+    <script>
+        // Starfield Animation
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        const stars = [];
+        for (let i = 0; i < 200; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2,
+                speed: Math.random() * 0.5 + 0.1
+            });
+        }
+        
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff41';
+            
+            stars.forEach(star => {
+                ctx.globalAlpha = Math.random() * 0.8 + 0.2;
+                ctx.fillRect(star.x, star.y, star.size, star.size);
+                
+                star.y += star.speed;
+                if (star.y > canvas.height) {
+                    star.y = -star.size;
+                    star.x = Math.random() * canvas.width;
+                }
+            });
+            
+            requestAnimationFrame(animateStars);
+        }
+        
+        animateStars();
+        
+        // Particle System
+        const particleContainer = document.getElementById('particles');
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = Math.random() * window.innerHeight + 'px';
+            
+            const duration = Math.random() * 3000 + 2000;
+            particle.style.animation = `float ${duration}ms linear infinite`;
+            
+            particleContainer.appendChild(particle);
+            
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, duration);
+        }
+        
+        // Add CSS animation for particles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+                100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        setInterval(createParticle, 500);
+        
+        // Deterministic Audio Signal
+        let audioContext;
+        let oscillator;
+        
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.frequency.setValueAtTime(55, audioContext.currentTime); // Low A
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.start();
+            }
+        }
+        
+        document.addEventListener('click', initAudio, { once: true });
+        
+        // WebLLM Integration (Placeholder - would need actual WebLLM implementation)
+        async function queryTwin() {
+            const input = document.querySelector('.twin-input').value;
+            const response = document.getElementById('twinResponse');
+            
+            if (!input.trim()) return;
+            
+            response.innerHTML = '<div class="loading"></div> Processing query through AURA Cognitive Core...';
+            
+            // Simulate WebLLM processing
+            setTimeout(() => {
+                const responses = [
+                    `The transition from physical infrastructure auditing to AI safety engineering represents a fundamental shift from reactive to proactive verification. In my BP/Shell days, we audited after systems were built. Now, with Crucible Engine, we prove correctness before deployment.`,
+                    
+                    `The "Bicameral AI Double Key" architecture ensures no single AI agent can make unilateral decisions. Like nuclear launch protocols, critical AI operations require consensus between multiple verification systems - the Blue Team (logic verification) and Red Team (adversarial testing).`,
+                    
+                    `"Vibecoding" emerged from recognizing that most requirements start as informal "vibes" - intuitive understanding of what a system should do. The Crucible Engine transforms these vibes into mathematically rigorous specifications through Tree-Sitter parsing and Z3 SMT solving.`,
+                    
+                    `Post-quantum cryptography isn't just about future-proofing - it's about creating audit trails that remain valid even as computing paradigms shift. ML-KEM and ML-DSA signatures ensure our verification certificates maintain integrity across technological transitions.`,
+                    
+                    `The "HAL 9000 Fallacy" describes how science fiction narratives create unrealistic expectations about AI behavior. By providing verifiable proofs instead of black-box outputs, we shift evaluation from narrative belief to mathematical certainty.`
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                response.innerHTML = randomResponse;
+            }, 2000);
+        }
+        
+        // Initialize particles on load
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createParticle, i * 200);
+        }
+    </script>
+</body>
+</html>
