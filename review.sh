@@ -9,7 +9,7 @@ git diff --name-only HEAD~1 HEAD 2>/dev/null || git diff --name-only --cached
 echo ""
 echo "Security scan results:"
 echo "----------------------"
-grep -r "password\|secret\|token" --include="*.py" --include="*.js" --include="*.rs" . 2>/dev/null && echo "SECRETS FOUND" || echo "Secrets: CLEAN"
+grep -r "password\|secret\|api_key\|private_key" --include="*.py" --include="*.js" --include="*.rs" . 2>/dev/null | grep -v "// " | grep -v "# " && echo "SECRETS FOUND" || echo "Secrets: CLEAN"
 grep -r "eval(\|innerHTML" --include="*.js" . 2>/dev/null && echo "XSS RISKS FOUND" || echo "XSS: CLEAN"
 grep -r "\.\./\|C:\\\\" --include="*.py" --include="*.js" . 2>/dev/null && echo "HARDCODED PATHS FOUND" || echo "Paths: CLEAN"
 

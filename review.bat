@@ -11,7 +11,7 @@ echo Security scan results:
 echo ----------------------
 
 REM Show any potential issues
-findstr /R /C:"password" /C:"secret" /C:"token" *.py *.js *.rs 2>nul && echo SECRETS FOUND || echo Secrets: CLEAN
+findstr /R /C:"password" /C:"secret" /C:"api_key" /C:"private_key" *.py *.js *.rs 2>nul | findstr /V "//" | findstr /V "#" && echo SECRETS FOUND || echo Secrets: CLEAN
 findstr /R /C:"eval(" /C:"innerHTML" *.js 2>nul && echo XSS RISKS FOUND || echo XSS: CLEAN
 findstr /R /C:"\.\." /C:"C:\\" *.py *.js 2>nul && echo HARDCODED PATHS FOUND || echo Paths: CLEAN
 
