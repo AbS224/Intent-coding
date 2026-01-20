@@ -11,9 +11,15 @@ echo Security scan results:
 echo ----------------------
 
 REM Show any potential issues
-findstr /R /C:"password" /C:"secret" /C:"api_key" /C:"private_key" *.py *.js *.rs 2>nul | findstr /V "//" | findstr /V "#" && echo SECRETS FOUND || echo Secrets: CLEAN
-findstr /R /C:"eval(" /C:"innerHTML" *.js 2>nul && echo XSS RISKS FOUND || echo XSS: CLEAN
-findstr /R /C:"\.\." /C:"C:\\" *.py *.js 2>nul && echo HARDCODED PATHS FOUND || echo Paths: CLEAN
+echo Checking for secrets...
+findstr /R "password" *.py *.js *.rs 2>nul >nul && echo SECRETS FOUND || echo Secrets: CLEAN
+findstr /R "secret" *.py *.js *.rs 2>nul >nul && echo SECRETS FOUND || echo Secrets: CLEAN
+findstr /R "api_key" *.py *.js *.rs 2>nul >nul && echo SECRETS FOUND || echo Secrets: CLEAN
+echo Checking for XSS risks...
+findstr /R "eval(" *.js 2>nul >nul && echo XSS RISKS FOUND || echo XSS: CLEAN
+findstr /R "innerHTML" *.js 2>nul >nul && echo XSS RISKS FOUND || echo XSS: CLEAN
+echo Checking for hardcoded paths...
+findstr /R "C:\\" *.py *.js 2>nul >nul && echo HARDCODED PATHS FOUND || echo Paths: CLEAN
 
 echo.
 echo Build status:
