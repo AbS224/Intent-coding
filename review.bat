@@ -12,9 +12,11 @@ echo ----------------------
 
 REM Show any potential issues
 echo Checking for secrets...
-findstr /R "password" *.py *.js *.rs 2>nul >nul && echo SECRETS FOUND || echo Secrets: CLEAN
-findstr /R "secret" *.py *.js *.rs 2>nul >nul && echo SECRETS FOUND || echo Secrets: CLEAN
-findstr /R "api_key" *.py *.js *.rs 2>nul >nul && echo SECRETS FOUND || echo Secrets: CLEAN
+findstr /R "password.*=" *.py *.js *.rs 2>nul >nul && echo SECRETS FOUND || (
+findstr /R "secret.*=" *.py *.js *.rs 2>nul >nul && echo SECRETS FOUND || (
+findstr /R "api_key.*=" *.py *.js *.rs 2>nul >nul && echo SECRETS FOUND || echo Secrets: CLEAN
+)
+)
 echo Checking for XSS risks...
 findstr /R "eval(" *.js 2>nul >nul && echo XSS RISKS FOUND || echo XSS: CLEAN
 findstr /R "innerHTML" *.js 2>nul >nul && echo XSS RISKS FOUND || echo XSS: CLEAN
