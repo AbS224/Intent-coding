@@ -2,7 +2,7 @@
 ## "Correct by Design, Not by Debugging"
 
 [![Build Status](https://github.com/AbS224/Intent-coding/workflows/CI/badge.svg)](https://github.com/AbS224/Intent-coding/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: CEEL](https://img.shields.io/badge/License-CEEL-blue.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=flat&logo=rust&logoColor=white)](https://www.rust-lang.org/)
 [![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
@@ -210,7 +210,16 @@ Crucible Engine provides **measurable improvements** over traditional developmen
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **Crucible Engine Educational License (CEEL) v1.0** - see the [LICENSE](LICENSE) file for details.
+
+### License Summary
+- ✅ **Educational Use**: Free for learning, research, and academic purposes
+- ✅ **Non-Commercial**: Free for personal experimentation and development
+- ✅ **Contributing**: Encouraged and welcomed under the same terms
+- ❌ **Commercial Production**: Requires separate commercial license
+- 🗓️ **Open Source Transition**: Automatically becomes MIT License on December 1, 2029
+
+For commercial licensing inquiries: [abs224@users.noreply.github.com](mailto:abs224@users.noreply.github.com)
 
 ---
 

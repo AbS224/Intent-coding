@@ -1,0 +1,71 @@
+Crucible Engine Educational License (CEEL) v1.0
+
+Copyright (c) 2024 AbS224 and contributors
+
+EDUCATIONAL AND RESEARCH USE LICENSE
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to use
+the Software for educational, research, and non-commercial purposes, subject
+to the following conditions:
+
+PERMITTED USES:
+- Educational instruction and learning
+- Academic research and study
+- Personal experimentation and development
+- Non-commercial evaluation and testing
+- Contributing to the project development
+
+PROHIBITED USES:
+- Commercial production deployment
+- Revenue-generating applications
+- Enterprise or business use in production environments
+- Redistribution for commercial purposes
+- Creating derivative works for commercial use
+
+CONDITIONS:
+1. The above copyright notice and this permission notice shall be included in
+   all copies or substantial portions of the Software.
+
+2. Any academic publications, research papers, or educational materials that
+   use or reference this Software must cite the Crucible Engine project.
+
+3. Contributions to the project (pull requests, issues, documentation) are
+   welcome and will be considered under the same license terms.
+
+4. The Software may not be used in any production environment that generates
+   revenue, serves commercial customers, or operates as part of a business
+   without explicit written permission from the copyright holder.
+
+OPEN SOURCE TRANSITION:
+On December 1, 2029 (five years from initial release), this Software will
+automatically transition to the MIT License, making it freely available for
+all uses including commercial production deployment.
+
+DISCLAIMER:
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+FORMAL VERIFICATION DISCLAIMER:
+While this Software aims to provide formal verification and mathematical proofs
+of correctness, users are responsible for validating the suitability of any
+generated code for their specific use cases. The formal verification features
+are provided for educational and research purposes.
+
+For commercial licensing inquiries, please contact: abs224@users.noreply.github.com
+
+---
+
+SUMMARY:
+✅ Educational use - FREE
+✅ Research use - FREE  
+✅ Learning and experimentation - FREE
+✅ Contributing to the project - ENCOURAGED
+❌ Commercial production use - REQUIRES LICENSE
+❌ Revenue-generating applications - REQUIRES LICENSE
+🗓️ Full open source (MIT) - December 1, 2029
