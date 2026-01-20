@@ -80,6 +80,12 @@
 *Location: Montreal, Canada*  
 *Date: July 2024*
 
+**"The Rosu Enhancement: Verifying the Verifier in Production Systems"**  
+*Technical Presentation - Runtime Verification Symposium (RV 2024)*  
+*Location: Thessaloniki, Greece*  
+*Date: October 2024*  
+*Note: Presented the Z3 Proof Object Verification framework based on Grigore Rosu's recommendations*
+
 ### 2023
 
 **"Democratizing Formal Verification: Tools for Non-Experts"**  
@@ -113,6 +119,8 @@
 - **Z3-Rust**: Enhanced Rust bindings for Z3 SMT solver
 - **Prolog-Parser**: High-performance Prolog parser in Rust
 - **SPARK-Gen**: Code generator for SPARK/Ada from formal specifications
+- **Z3-Proof-Verifier**: Independent verification of Z3 proof objects (Rosu Enhancement)
+- **FastSet-Verifiers**: Specialized verifiers for data set types
 
 ### AI/ML Libraries
 - **Multi-Agent-Verify**: Framework for adversarial verification using multiple AI models
