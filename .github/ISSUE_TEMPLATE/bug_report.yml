@@ -1,0 +1,90 @@
+name: Bug Report
+description: Report a bug in Crucible Engine
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🛡️ Crucible Engine Bug Report
+        Thank you for helping improve our formally verified development platform!
+        
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Clear and concise description of the bug
+      placeholder: Describe what happened and what you expected to happen
+    validations:
+      required: true
+      
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed steps to reproduce the behavior
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+      
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Your development environment details
+      placeholder: |
+        - OS: Windows 11 / WSL2 Ubuntu 22.04
+        - Rust version: 1.70+
+        - Node.js version: 18+
+        - Browser: Chrome 120+
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component Affected
+      description: Which part of Crucible Engine is affected?
+      options:
+        - Intent-AST Parser
+        - Formal Verification Engine
+        - Web Interface
+        - Documentation Generator
+        - Development Environment
+        - Security System
+        - Other
+    validations:
+      required: true
+      
+  - type: checkboxes
+    id: verification
+    attributes:
+      label: Verification Impact
+      description: Does this bug affect formal verification?
+      options:
+        - label: This bug affects mathematical proof generation
+        - label: This bug affects correctness scoring
+        - label: This bug affects security properties
+        - label: This bug does not affect verification
+          
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Logs
+      description: Any relevant error messages or logs
+      render: shell
+      
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I have searched existing issues for duplicates
+          required: true
+        - label: I have provided all required information
+          required: true
+        - label: I understand this is for bugs, not feature requests
+          required: true

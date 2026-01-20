@@ -1,0 +1,85 @@
+name: Feature Request
+description: Suggest a new feature for Crucible Engine
+title: "[FEATURE] "
+labels: ["enhancement", "needs-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🚀 Crucible Engine Feature Request
+        Help us build the future of formally verified software development!
+        
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve?
+      placeholder: Describe the current limitation or pain point
+    validations:
+      required: true
+      
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe your proposed feature
+      placeholder: How should this feature work?
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component Area
+      description: Which part of Crucible Engine would this affect?
+      options:
+        - Intent-AST Parser
+        - Formal Verification Engine
+        - AI/ML (ANNIE)
+        - Web Interface
+        - Documentation System
+        - Security & Compliance
+        - Developer Experience
+        - Other
+    validations:
+      required: true
+      
+  - type: checkboxes
+    id: verification
+    attributes:
+      label: Formal Verification Impact
+      description: How does this relate to formal verification?
+      options:
+        - label: Enhances mathematical proof generation
+        - label: Improves correctness analysis
+        - label: Strengthens security properties
+        - label: Does not affect verification directly
+        
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How important is this feature?
+      options:
+        - Critical (blocks major functionality)
+        - High (significant improvement)
+        - Medium (nice to have)
+        - Low (minor enhancement)
+    validations:
+      required: true
+      
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Any alternative approaches you've considered?
+      
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I would be willing to implement this feature
+        - label: I can provide technical guidance
+        - label: I can help with testing
+        - label: I can help with documentation

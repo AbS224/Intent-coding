@@ -1,6 +1,10 @@
 # Crucible Engine .gitignore
 # "Correct by Design, Not by Debugging"
 
+# MIL-SPEC Security Lock
+.push_token
+logs/
+
 # Private/Internal Documents
 private/
 *.internal

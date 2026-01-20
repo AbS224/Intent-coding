@@ -1,0 +1,24 @@
+# WSL Configuration for Crucible Engine
+# Place this file at: %USERPROFILE%\.wslconfig
+
+[wsl2]
+# Memory allocation for Z3 SMT solver and Tree-Sitter parsing
+memory=8GB
+
+# CPU allocation for parallel verification
+processors=4
+
+# Swap space for complex satisfiability checks
+swap=4GB
+
+# Enable localhost forwarding for development server
+localhostForwarding=true
+
+# Disable page reporting for better performance
+pageReporting=false
+
+# Enable nested virtualization for Podman
+nestedVirtualization=true
+
+# Kernel command line options for performance
+kernelCommandLine=cgroup_no_v1=all systemd.unified_cgroup_hierarchy=1

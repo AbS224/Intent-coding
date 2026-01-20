@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  crucible-ci:
+    build:
+      context: .
+      dockerfile: Dockerfile.ci
+    volumes:
+      - .:/workspace
+      - /var/run/docker.sock:/var/run/docker.sock
+    working_dir: /workspace
+    environment:
+      - CI=true
+      - RUST_BACKTRACE=1
+    command: /bin/bash -c "
+      echo '🛡️ Crucible Engine Local CI Pipeline' &&
+      echo '===================================' &&
+      
+      echo '1. Security Scan...' &&
+      if grep -r 'password\\|secret\\|key' --include='*.rs' --include='*.js' --include='*.py' . | grep -v 'example\\|test'; then
+        echo '❌ Secrets detected' && exit 1
+      fi &&
+      echo '✅ Security scan passed' &&
+      
+      echo '2. Rust Quality...' &&
+      cargo fmt --check &&
+      cargo clippy -- -D warnings &&
+      cargo build &&
+      cargo test &&
+      echo '✅ Rust quality passed' &&
+      
+      echo '3. MIL-SPEC Compliance...' &&
+      for doc in BUILD_CHECKLIST.md README.md LICENSE SECURITY.md CONTRIBUTING.md; do
+        if [ ! -f \$doc ]; then
+          echo \"❌ Missing: \$doc\" && exit 1
+        fi
+      done &&
+      echo '✅ MIL-SPEC compliance verified' &&
+      
+      echo '🎉 All checks passed - Ready for push!'
+    "
+
+  redis-cache:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+
+volumes:
+  redis_data:

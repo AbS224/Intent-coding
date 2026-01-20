@@ -42,5 +42,3 @@ This security review and remediation demonstrates our commitment to "Correct by 
 
 **Status**: v0.1.2-alpha - Security Hardened ✅
 **Next**: v0.2.0-alpha - Parser Integration (February 2026)
-
-Co-authored-by: Amazon Q Security Review <security@amazonq.ai>

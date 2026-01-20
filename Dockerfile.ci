@@ -1,0 +1,37 @@
+FROM rust:1.75-slim
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    build-essential \
+    pkg-config \
+    libssl-dev \
+    python3 \
+    python3-pip \
+    nodejs \
+    npm \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Rust components
+RUN rustup component add rustfmt clippy
+
+# Install Python tools
+RUN pip3 install black flake8 mypy
+
+# Install Node.js tools
+RUN npm install -g prettier eslint
+
+# Create workspace
+WORKDIR /workspace
+
+# Copy requirements and install Python deps
+COPY requirements.txt* ./
+RUN if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
+
+# Set environment
+ENV CI=true
+ENV RUST_BACKTRACE=1
+
+# Default command
+CMD ["/bin/bash"]

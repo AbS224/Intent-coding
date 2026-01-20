@@ -1,0 +1,104 @@
+name: Crucible Engine CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    name: Security Scan
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Secret Detection
+      run: |
+        echo "🔍 Scanning for secrets..."
+        if grep -r -E "(password|secret|key|token)" --include="*.rs" --include="*.js" --include="*.py" . | grep -v "example\|test\|placeholder"; then
+          echo "❌ Secrets detected"
+          exit 1
+        fi
+        echo "✅ No secrets found"
+    
+    - name: Vulnerability Scan
+      run: |
+        echo "🛡️ Scanning for vulnerabilities..."
+        if grep -r -E "(eval\(|innerHTML|document\.write)" --include="*.js" .; then
+          echo "❌ XSS vulnerabilities detected"
+          exit 1
+        fi
+        echo "✅ No vulnerabilities found"
+
+  rust-check:
+    runs-on: ubuntu-latest
+    name: Rust Quality
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        components: rustfmt, clippy
+    
+    - name: Format Check
+      run: cargo fmt --check
+    
+    - name: Clippy
+      run: cargo clippy -- -D warnings
+    
+    - name: Build
+      run: cargo build
+    
+    - name: Test
+      run: cargo test
+
+  milspec-compliance:
+    runs-on: ubuntu-latest
+    name: MIL-SPEC Compliance
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Documentation Check
+      run: |
+        echo "📋 Checking MIL-SPEC compliance..."
+        for doc in BUILD_CHECKLIST.md README.md LICENSE SECURITY.md CONTRIBUTING.md; do
+          if [ ! -f "$doc" ]; then
+            echo "❌ Missing required document: $doc"
+            exit 1
+          fi
+          echo "✅ Found: $doc"
+        done
+    
+    - name: Security Configuration
+      run: |
+        if [ ! -f ".security.env" ]; then
+          echo "❌ Missing security configuration"
+          exit 1
+        fi
+        echo "✅ Security configuration present"
+    
+    - name: Git Attributes
+      run: |
+        if [ ! -f ".gitattributes" ]; then
+          echo "❌ Missing .gitattributes for cross-platform consistency"
+          exit 1
+        fi
+        echo "✅ Git attributes configured"
+
+  build-report:
+    runs-on: ubuntu-latest
+    name: Build Report
+    needs: [security-scan, rust-check, milspec-compliance]
+    if: always()
+    steps:
+    - name: Generate Report
+      run: |
+        echo "## 🛡️ Crucible Engine CI Report" >> $GITHUB_STEP_SUMMARY
+        echo "- Security Scan: ${{ needs.security-scan.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Rust Quality: ${{ needs.rust-check.result }}" >> $GITHUB_STEP_SUMMARY  
+        echo "- MIL-SPEC Compliance: ${{ needs.milspec-compliance.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY

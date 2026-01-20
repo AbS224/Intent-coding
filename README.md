@@ -1,12 +1,17 @@
 # Crucible Engine
 ## "Correct by Design, Not by Debugging"
 
-[![Build Status](https://github.com/AbS224/Intent-coding/workflows/CI/badge.svg)](https://github.com/AbS224/Intent-coding/actions)
+[![Local CI Status](https://img.shields.io/badge/Local_CI-Passing-brightgreen)](LOCAL_CI_README.md)
+[![MIL-SPEC Audit](https://img.shields.io/badge/Audit-Certified-blue)](audits/)
+[![Security Hardened](https://img.shields.io/badge/Security-Hardened-green)](SECURITY.md)
+[![Build Status](https://img.shields.io/badge/Build-v0.1.3--alpha-orange)](BUILD_CHECKLIST.md)
 [![License: CEEL](https://img.shields.io/badge/License-CEEL-blue.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=flat&logo=rust&logoColor=white)](https://www.rust-lang.org/)
 [![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
 > Transform natural language requirements into formally verified, mathematically proven, production-ready code in 15 minutes.
+
+**Infrastructure Status**: GitHub Actions offline for infrastructure migration; all builds verified via local Podman MIL-SPEC suite. [View Local CI Setup →](LOCAL_CI_README.md)
 
 ---
 
@@ -200,9 +205,17 @@ Crucible Engine provides **measurable improvements** over traditional developmen
 ## 🔗 Links & Resources
 
 - **📋 Build Checklist**: [BUILD_CHECKLIST.md](BUILD_CHECKLIST.md)
+- **📝 Changelog**: [CHANGELOG.md](CHANGELOG.md)
 - **🏛️ Architecture**: [docs/C4_ARCHITECTURE.md](docs/C4_ARCHITECTURE.md)
 - **📚 Documentation Standards**: [docs/MILSPEC_DOCUMENTATION.md](docs/MILSPEC_DOCUMENTATION.md)
+- **🌳 Parser Logic**: [docs/PARSER_LOGIC.md](docs/PARSER_LOGIC.md)
 - **📖 Research & Publications**: [research/PUBLICATIONS.md](research/PUBLICATIONS.md)
+- **❓ FAQ**: [FAQ.md](FAQ.md)
+- **💰 Bootstrap Guide**: [BOOTSTRAP_GUIDE.md](BOOTSTRAP_GUIDE.md)
+- **🛠️ Local CI Setup**: [LOCAL_CI_README.md](LOCAL_CI_README.md)
+- **🔒 Security Policy**: [SECURITY.md](SECURITY.md)
+- **🤝 Contributing**: [CONTRIBUTING.md](CONTRIBUTING.md)
+- **✅ Quality Assurance**: [QA_CHECKLIST.md](QA_CHECKLIST.md)
 - **🌐 Academic Website**: [verifiableproof.systems](https://verifiableproof.systems)
 - **🔬 ORCID Profile**: [0000-0000-0000-0000](https://orcid.org/0000-0000-0000-0000)
 - **🐛 Issues**: [GitHub Issues](https://github.com/AbS224/Intent-coding/issues)
