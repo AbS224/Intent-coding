@@ -1,0 +1,106 @@
+# Crucible Engine .gitignore
+# "Correct by Design, Not by Debugging"
+
+# Rust
+/target/
+**/*.rs.bk
+*.pdb
+Cargo.lock
+
+# Node.js / Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dist/
+build/
+.next/
+.nuxt/
+.vuepress/dist/
+
+# Environment & Config
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+config/local.json
+secrets/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+data/
+postgres_data/
+influxdb_data/
+redis_data/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Formal Verification Artifacts
+*.smt2
+*.z3
+*.spark
+proofs/
+verification_cache/
+gnatprove/
+
+# AI Model Cache
+.cache/
+models/
+embeddings/
+
+# Metrics & Analytics
+metrics_data/
+analytics_cache/
+benchmark_results/
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# OS Generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup Files
+*.bak
+*.backup
+*~
+
+# Test Coverage
+coverage/
+.nyc_output/
+lcov.info
+
+# Performance Profiling
+*.prof
+perf.data*
+flamegraph.svg
