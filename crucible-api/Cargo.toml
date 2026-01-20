@@ -1,0 +1,19 @@
+[package]
+name = "crucible-api"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "crucible-server"
+path = "src/main.rs"
+
+[dependencies]
+crucible-core = { path = "../crucible-core" }
+tokio.workspace = true
+axum.workspace = true
+tower-http.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true

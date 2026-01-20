@@ -1,0 +1,17 @@
+[package]
+name = "crucible-codegen"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Multi-language code generation from verified specifications"
+
+[dependencies]
+crucible-core = { path = "../crucible-core" }
+serde.workspace = true
+serde_json.workspace = true
+uuid.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+tracing.workspace = true

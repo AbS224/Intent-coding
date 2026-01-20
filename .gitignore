@@ -58,7 +58,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # IDEs & Editors
-.vscode/
+# .vscode/  # Allow VS Code config for public setup
 .idea/
 *.swp
 *.swo

@@ -1,0 +1,108 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Crucible: Build (WSL)",
+            "type": "shell",
+            "command": "cargo",
+            "args": ["build"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "shell": {
+                    "executable": "wsl.exe",
+                    "args": ["-d", "Ubuntu", "--cd", "/mnt/l/FinalTry", "--"]
+                }
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": "$rustc"
+        },
+        {
+            "label": "Crucible: Test (WSL)",
+            "type": "shell",
+            "command": "cargo",
+            "args": ["test"],
+            "group": "test",
+            "options": {
+                "shell": {
+                    "executable": "wsl.exe",
+                    "args": ["-d", "Ubuntu", "--cd", "/mnt/l/FinalTry", "--"]
+                }
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": "$rustc"
+        },
+        {
+            "label": "Crucible: Demo (WSL)",
+            "type": "shell",
+            "command": "cargo",
+            "args": ["run", "--bin", "crucible-demo"],
+            "group": "build",
+            "options": {
+                "shell": {
+                    "executable": "wsl.exe",
+                    "args": ["-d", "Ubuntu", "--cd", "/mnt/l/FinalTry", "--"]
+                }
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "problemMatcher": "$rustc"
+        },
+        {
+            "label": "Crucible: MIL-SPEC Generate (WSL)",
+            "type": "shell",
+            "command": "python3",
+            "args": ["milspec_generator.py", "generate"],
+            "group": "build",
+            "options": {
+                "shell": {
+                    "executable": "wsl.exe",
+                    "args": ["-d", "Ubuntu", "--cd", "/mnt/l/FinalTry", "--"]
+                }
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "WSL: Reset Bridge",
+            "type": "shell",
+            "command": "wsl",
+            "args": ["--shutdown"],
+            "group": "build",
+            "options": {
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-Command"]
+                }
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        }
+    ]
+}

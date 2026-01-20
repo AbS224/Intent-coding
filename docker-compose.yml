@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  crucible-api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - RUST_LOG=info
+    volumes:
+      - .:/app
+      - cargo-cache:/usr/local/cargo/registry
+    working_dir: /app
+
+volumes:
+  cargo-cache:

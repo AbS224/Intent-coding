@@ -1,0 +1,18 @@
+[package]
+name = "crucible-verification"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Formal verification engine with Z3 SMT solver integration"
+
+[dependencies]
+crucible-core = { path = "../crucible-core" }
+z3.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+uuid.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
