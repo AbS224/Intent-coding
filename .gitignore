@@ -1,6 +1,12 @@
 # Crucible Engine .gitignore
 # "Correct by Design, Not by Debugging"
 
+# Private/Internal Documents
+private/
+*.internal
+*.spec
+*.confidential
+
 # Rust
 /target/
 **/*.rs.bk
