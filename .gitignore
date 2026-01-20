@@ -2,7 +2,8 @@
 # "Correct by Design, Not by Debugging"
 
 # MIL-SPEC Security Lock
-.push_token
+.milspec-unlock
+.kilo
 logs/
 
 # Private/Internal Documents
