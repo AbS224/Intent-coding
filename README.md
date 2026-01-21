@@ -188,6 +188,26 @@ We welcome contributions from the community! Here's how to get involved:
 
 ---
 
+## ♿ Accessibility & Inclusion
+
+Crucible Engine is committed to accessibility for all developers. We follow WCAG 2.2 guidelines and prioritize inclusive design:
+
+### Features
+- **Screen Reader Compatible**: All documentation uses semantic structure
+- **High Contrast Support**: Code examples and UI designed for visibility
+- **Keyboard Navigation**: Full keyboard access to all features
+- **Cognitive Accessibility**: Clear, concise language and logical flow
+- **Automated Checks**: Local CI includes accessibility validation
+
+### Our Standards
+- **WCAG 2.2 AA** compliance for web interfaces
+- **Section 508** compliance for documentation
+- **Inclusive Design** principles throughout development
+
+[📖 View Full Accessibility Guidelines](docs/ACCESSIBILITY.md)
+
+---
+
 ## 📊 Metrics & Transparency
 
 Crucible Engine provides **measurable improvements** over traditional development:
