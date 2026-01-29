@@ -126,3 +126,101 @@ impl Default for IntentAst {
         Self::new()
     }
 }
+
+// =============================================================================
+// Type-Aware Schema Registry (v0.1.5-alpha)
+// =============================================================================
+
+/// Data types for type-aware code generation with overflow protection
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum DataType {
+    /// Unsigned 64-bit integer (common for balances)
+    Uint64,
+    /// Unsigned 32-bit integer
+    Uint32,
+    /// Signed 64-bit integer
+    Int64,
+    /// Signed 32-bit integer
+    Int32,
+    /// String type
+    String,
+    /// Boolean type
+    Bool,
+    /// Fixed-point decimal (for financial precision)
+    Decimal,
+    /// Custom type with range constraints
+    Custom {
+        name: String,
+        range_min: Option<i128>,
+        range_max: Option<i128>,
+    },
+}
+
+/// Maps a variable name to its data type for overflow-safe code generation
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Schema {
+    /// Variable name -> Data type mapping
+    pub fields: std::collections::HashMap<String, DataType>,
+    /// Optional documentation for each field
+    pub documentation: std::collections::HashMap<String, String>,
+    /// Traceability ID linking to Z3 SMT solver run
+    pub traceability_id: String,
+}
+
+impl Schema {
+    /// Create a new empty schema
+    pub fn new(traceability_id: String) -> Self {
+        Self {
+            fields: std::collections::HashMap::new(),
+            documentation: std::collections::HashMap::new(),
+            traceability_id,
+        }
+    }
+
+    /// Add a field to the schema
+    pub fn add_field(&mut self, name: String, data_type: DataType, docs: Option<String>) {
+        self.fields.insert(name.clone(), data_type);
+        if let Some(doc) = docs {
+            self.documentation.insert(name, doc);
+        }
+    }
+
+    /// Get the data type for a variable, defaulting to Int32
+    pub fn get_type(&self, name: &str) -> DataType {
+        self.fields.get(name).cloned().unwrap_or(DataType::Int32)
+    }
+
+    /// Check if a field requires overflow-safe arithmetic
+    pub fn requires_overflow_protection(&self, name: &str) -> bool {
+        matches!(
+            self.get_type(name),
+            DataType::Uint64 | DataType::Uint32 | DataType::Int64 | DataType::Int32
+        )
+    }
+}
+
+/// Arithmetic operators for overflow-safe operations
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ArithmeticOperator {
+    Add,
+    Subtract,
+    Multiply,
+    Divide,
+}
+
+impl ArithmeticOperator {
+    /// Get the Rust operator symbol
+    pub fn rust_symbol(&self) -> &'static str {
+        match self {
+            ArithmeticOperator::Add => "+",
+            ArithmeticOperator::Subtract => "-",
+            ArithmeticOperator::Multiply => "*",
+            ArithmeticOperator::Divide => "/",
+        }
+    }
+
+    /// Get the symbol for display
+    pub fn symbol(&self) -> &'static str {
+        self.rust_symbol()
+    }
+}

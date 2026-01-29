@@ -13,6 +13,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Type-Aware MIL-SPEC Generator (Schema Registry)**: Transition from boolean logic to type-safe formal verification
+  - `Schema` struct maps variables to `DataType` (e.g., `balance -> Uint64`)
+  - `DataType` enum with overflow-safe arithmetic support
+  - `ArithmeticOperator` enum for safe operation generation
+  - Overflow-protected operations (SPARK/Ada `Natural` types, Zig `@subWithOverflow`)
+  
+- **VerifiableStrategy Trait Extension**: Type-aware formal generation capabilities
+  - `map_type()`: Maps Crucible types to language-native high-integrity types
+  - `emit_postcondition()`: Generates formal post-condition contracts (SPARK `'Result` binding)
+  - `safe_op()`: Overflow-safe arithmetic operation generation
+  - `build_signature()`: Type-aware function signature generation
+  - `license_header()`: CEL-2.0 traceability with Patent Application #63/928,407
+  
+- **SPARK/Ada Type-Safe Contracts**:
+  - `Natural` type mapping (prevents negatives at type level)
+  - `'Result` binding for GNATprove mathematical proof
+  - DO-178C compliant post-condition generation
+  
+- **Zig Comptime Arithmetic Safety**:
+  - `@subWithOverflow` for subtraction (prevents DeFi integer overflow exploits)
+  - `@addWithOverflow` for addition
+  - Compile-time verification via `comptime` blocks
+  
+- **Rust Kani Proof Harness Integration**:
+  - `#[kani::proof]` attribute generation
+  - Bounded model checking support
+  - `kani::cover!` for verification reachability
+  
+- **Verification Density Metrics**:
+  - Proof-to-Code Ratio tracking
+  - SMT Solve Time measurement
+  - CEL-2.0 Traceability ID linking to Z3 SMT solver runs
+  
 - **Multi-Language Strategy Engine**: Refactored codegen to use a trait-based strategy pattern
   - `VerifiableStrategy` trait ensures contract-first generation
   - Every language defines `formal_contract` hook for proof integration
