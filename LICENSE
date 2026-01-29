@@ -1,8 +1,15 @@
-Crucible Engine Educational License (CEEL) v1.0
+Crucible Engine License (CEL) v2.0
 
-Copyright (c) 2024 AbS224 and contributors
+Copyright (c) 2024-2026 AbS224 and contributors
 
-EDUCATIONAL AND RESEARCH USE LICENSE
+PROVISIONAL PATENT APPLICATION: 63/928,407
+
+This software is dual-licensed under the following terms. Choose the license
+that best fits your use case:
+
+===============================================================================
+OPTION A: EDUCATIONAL AND RESEARCH USE LICENSE (FREE)
+===============================================================================
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to use
@@ -10,6 +17,7 @@ the Software for educational, research, and non-commercial purposes, subject
 to the following conditions:
 
 PERMITTED USES:
+
 - Educational instruction and learning
 - Academic research and study
 - Personal experimentation and development
@@ -17,6 +25,7 @@ PERMITTED USES:
 - Contributing to the project development
 
 PROHIBITED USES:
+
 - Commercial production deployment
 - Revenue-generating applications
 - Enterprise or business use in production environments
@@ -24,8 +33,9 @@ PROHIBITED USES:
 - Creating derivative works for commercial use
 
 CONDITIONS:
-1. The above copyright notice and this permission notice shall be included in
-   all copies or substantial portions of the Software.
+
+1. The above copyright notice, this permission notice, and the patent notice
+   shall be included in all copies or substantial portions of the Software.
 
 2. Any academic publications, research papers, or educational materials that
    use or reference this Software must cite the Crucible Engine project.
@@ -37,12 +47,51 @@ CONDITIONS:
    revenue, serves commercial customers, or operates as part of a business
    without explicit written permission from the copyright holder.
 
-OPEN SOURCE TRANSITION:
-On December 1, 2029 (five years from initial release), this Software will
-automatically transition to the MIT License, making it freely available for
-all uses including commercial production deployment.
+===============================================================================
+OPTION B: PROPRIETARY USE LICENSE (COMMERCIAL)
+===============================================================================
 
-DISCLAIMER:
+Organizations may use this Software for proprietary/commercial purposes under
+a separate commercial license agreement.
+
+PERMITTED USES (with commercial license):
+
+- Commercial production deployment
+- Revenue-generating applications
+- Enterprise and business use in production
+- Internal corporate development and testing
+- Integration into proprietary products and services
+
+REQUIREMENTS:
+
+1. Obtain a commercial license from the copyright holder
+2. Pay applicable licensing fees as outlined in the commercial agreement
+3. Include the patent notice in all distributions
+4. Provide attribution to the Crucible Engine project
+
+To inquire about commercial licensing, contact: <abs224@users.noreply.github.com>
+
+===============================================================================
+OPEN SOURCE TRANSITION (EDUCATIONAL LICENSE)
+===============================================================================
+
+On December 1, 2029 (five years from initial release), the Educational and
+Research Use License (Option A) will automatically transition to the MIT
+License, making it freely available for all uses including commercial
+production deployment.
+
+===============================================================================
+PATENT NOTICE
+===============================================================================
+
+This software is associated with Provisional Patent Application 63/928,407.
+All users acknowledge that the software may be covered by patent claims and
+that use of this software is subject to the patent holder's rights.
+
+===============================================================================
+DISCLAIMER
+===============================================================================
+
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -57,15 +106,20 @@ of correctness, users are responsible for validating the suitability of any
 generated code for their specific use cases. The formal verification features
 are provided for educational and research purposes.
 
-For commercial licensing inquiries, please contact: abs224@users.noreply.github.com
+===============================================================================
+LICENSE SUMMARY
+===============================================================================
 
----
-
-SUMMARY:
+OPTION A - Educational/Research Use: FREE
 ✅ Educational use - FREE
 ✅ Research use - FREE  
 ✅ Learning and experimentation - FREE
 ✅ Contributing to the project - ENCOURAGED
-❌ Commercial production use - REQUIRES LICENSE
-❌ Revenue-generating applications - REQUIRES LICENSE
-🗓️ Full open source (MIT) - December 1, 2029
+❌ Commercial production use - REQUIRES LICENSE (Option B)
+❌ Revenue-generating applications - REQUIRES LICENSE (Option B)
+
+OPTION B - Proprietary/Commercial Use: CONTACT FOR LICENSING
+✅ Commercial production deployment - WITH LICENSE
+✅ Revenue-generating applications - WITH LICENSE
+✅ Enterprise/business use - WITH LICENSE
+🗓️ Full open source (MIT) - December 1, 2029 (for Option A)

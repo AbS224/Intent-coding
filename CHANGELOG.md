@@ -9,6 +9,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.5-alpha] - 2026-02-01
+
+### Added
+
+- **Multi-Language Strategy Engine**: Refactored codegen to use a trait-based strategy pattern
+  - `VerifiableStrategy` trait ensures contract-first generation
+  - Every language defines `formal_contract` hook for proof integration
+  - Recursive AST walking logic centralized in CodeGenerator
+- **SPARK/Ada Support**: Generation of MIL-SPEC compliant Ada code with `pragma Assert` formal contracts
+  - `Pre =>` and `Post =>` contract generation
+  - SPARK_Mode => On for GNATprove integration
+- **Zig Support**: Native code generation with `@setRuntimeSafety` integration
+  - `comptime` blocks for compile-time validation
+  - `std.debug.assert` for runtime safety
+- **Elixir Support**: Functional predicate generation (`valid?/1`)
+  - Guard clauses for compile-time pattern matching
+  - Error tuples for fault-tolerant validation
+- **Solidity Support**: Smart contract verification with `require()` assertions
+  - Slither security analysis compatibility
+  - Echidna property testing support
+
+### Changed
+
+- **License Update (v2.0)**: Updated to dual-license model
+  - Added Option A: Educational and Research Use License (free)
+  - Added Option B: Proprietary Use License (commercial)
+  - **Provisional Patent Application**: 63/928,407
+  - Patent notice added to all source files
+  - License identifier updated from CEEL-1.0 to CEL-2.0
+
 ## [0.1.4-alpha] - 2026-01-29
 
 ### Added

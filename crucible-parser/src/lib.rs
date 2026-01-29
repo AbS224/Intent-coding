@@ -1,6 +1,11 @@
 //! Crucible Parser - Natural Language Requirement Parser using Tree-Sitter
 //! Phase 2: Parser & Basic Verification - v0.2.0-alpha
 //!
+//! Licensed under the Crucible Engine License v2.0
+//! See LICENSE file for full terms
+//!
+//! Provisional Patent Application: 63/928,407
+//!
 //! This module provides parsing functionality for natural language requirements,
 //! transforming them into an Intent-AST (Abstract Syntax Tree) for formal verification.
 

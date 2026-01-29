@@ -1,3 +1,11 @@
+//! Crucible Engine API Server
+//! "Correct by Design, Not by Debugging"
+//!
+//! Licensed under the Crucible Engine License v2.0
+//! See LICENSE file for full terms
+//!
+//! Provisional Patent Application: 63/928,407
+
 use axum::
     http::StatusCode,
     response::Json,
