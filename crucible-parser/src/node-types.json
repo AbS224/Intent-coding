@@ -1,0 +1,800 @@
+[
+  {
+    "type": "action",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "object",
+          "named": true
+        },
+        {
+          "type": "preposition_phrase",
+          "named": true
+        },
+        {
+          "type": "verb",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "arithmetic_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arithmetic_operator",
+          "named": true
+        },
+        {
+          "type": "left_expression",
+          "named": true
+        },
+        {
+          "type": "right_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "arithmetic_operator",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "comment",
+    "named": true,
+    "extra": true,
+    "fields": {}
+  },
+  {
+    "type": "comparison",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comparison_operator",
+          "named": true
+        },
+        {
+          "type": "left_expression",
+          "named": true
+        },
+        {
+          "type": "right_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "comparison_operator",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "condition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "constraint_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "constraint",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "constraint_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "constraint_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "arithmetic_expression",
+          "named": true
+        },
+        {
+          "type": "comparison",
+          "named": true
+        },
+        {
+          "type": "logical_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "escape_sequence",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "comparison",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "left_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "logical_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "modal_verb",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "noun_phrase",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "object",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "preposition",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "preposition_phrase",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "noun_phrase",
+          "named": true
+        },
+        {
+          "type": "preposition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "action",
+          "named": true
+        },
+        {
+          "type": "condition",
+          "named": true
+        },
+        {
+          "type": "constraint",
+          "named": true
+        },
+        {
+          "type": "modal_verb",
+          "named": true
+        },
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "subject",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "right_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "newline",
+          "named": true
+        },
+        {
+          "type": "requirement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subject",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "verb",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "!=",
+    "named": false
+  },
+  {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "%",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
+    "type": "-",
+    "named": false
+  },
+  {
+    "type": "/",
+    "named": false
+  },
+  {
+    "type": "//",
+    "named": false
+  },
+  {
+    "type": "<",
+    "named": false
+  },
+  {
+    "type": "<=",
+    "named": false
+  },
+  {
+    "type": "==",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": ">=",
+    "named": false
+  },
+  {
+    "type": "API",
+    "named": false
+  },
+  {
+    "type": "Admin",
+    "named": false
+  },
+  {
+    "type": "Application",
+    "named": false
+  },
+  {
+    "type": "Service",
+    "named": false
+  },
+  {
+    "type": "System",
+    "named": false
+  },
+  {
+    "type": "User",
+    "named": false
+  },
+  {
+    "type": "\\",
+    "named": false
+  },
+  {
+    "type": "account_data",
+    "named": false
+  },
+  {
+    "type": "after",
+    "named": false
+  },
+  {
+    "type": "and",
+    "named": false
+  },
+  {
+    "type": "at",
+    "named": false
+  },
+  {
+    "type": "at_least",
+    "named": false
+  },
+  {
+    "type": "at_most",
+    "named": false
+  },
+  {
+    "type": "authenticate",
+    "named": false
+  },
+  {
+    "type": "authorize",
+    "named": false
+  },
+  {
+    "type": "before",
+    "named": false
+  },
+  {
+    "type": "by",
+    "named": false
+  },
+  {
+    "type": "calculate",
+    "named": false
+  },
+  {
+    "type": "can",
+    "named": false
+  },
+  {
+    "type": "certificate_data",
+    "named": false
+  },
+  {
+    "type": "contains",
+    "named": false
+  },
+  {
+    "type": "create",
+    "named": false
+  },
+  {
+    "type": "data_record",
+    "named": false
+  },
+  {
+    "type": "decrypt",
+    "named": false
+  },
+  {
+    "type": "delete",
+    "named": false
+  },
+  {
+    "type": "deposit",
+    "named": false
+  },
+  {
+    "type": "document_data",
+    "named": false
+  },
+  {
+    "type": "does_not_contain",
+    "named": false
+  },
+  {
+    "type": "during",
+    "named": false
+  },
+  {
+    "type": "encrypt",
+    "named": false
+  },
+  {
+    "type": "equals",
+    "named": false
+  },
+  {
+    "type": "export",
+    "named": false
+  },
+  {
+    "type": "file_data",
+    "named": false
+  },
+  {
+    "type": "for",
+    "named": false
+  },
+  {
+    "type": "from",
+    "named": false
+  },
+  {
+    "type": "generate",
+    "named": false
+  },
+  {
+    "type": "greater_than",
+    "named": false
+  },
+  {
+    "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "if",
+    "named": false
+  },
+  {
+    "type": "import",
+    "named": false
+  },
+  {
+    "type": "in",
+    "named": false
+  },
+  {
+    "type": "into",
+    "named": false
+  },
+  {
+    "type": "is_not_set",
+    "named": false
+  },
+  {
+    "type": "is_set",
+    "named": false
+  },
+  {
+    "type": "less_than",
+    "named": false
+  },
+  {
+    "type": "login",
+    "named": false
+  },
+  {
+    "type": "logout",
+    "named": false
+  },
+  {
+    "type": "may",
+    "named": false
+  },
+  {
+    "type": "message_data",
+    "named": false
+  },
+  {
+    "type": "must",
+    "named": false
+  },
+  {
+    "type": "n",
+    "named": false
+  },
+  {
+    "type": "newline",
+    "named": true
+  },
+  {
+    "type": "not",
+    "named": false
+  },
+  {
+    "type": "not_equals",
+    "named": false
+  },
+  {
+    "type": "number",
+    "named": true
+  },
+  {
+    "type": "on",
+    "named": false
+  },
+  {
+    "type": "onto",
+    "named": false
+  },
+  {
+    "type": "or",
+    "named": false
+  },
+  {
+    "type": "password_data",
+    "named": false
+  },
+  {
+    "type": "process",
+    "named": false
+  },
+  {
+    "type": "read",
+    "named": false
+  },
+  {
+    "type": "receive",
+    "named": false
+  },
+  {
+    "type": "register",
+    "named": false
+  },
+  {
+    "type": "retrieve",
+    "named": false
+  },
+  {
+    "type": "send",
+    "named": false
+  },
+  {
+    "type": "shall",
+    "named": false
+  },
+  {
+    "type": "should",
+    "named": false
+  },
+  {
+    "type": "store",
+    "named": false
+  },
+  {
+    "type": "t",
+    "named": false
+  },
+  {
+    "type": "the",
+    "named": false
+  },
+  {
+    "type": "through",
+    "named": false
+  },
+  {
+    "type": "to",
+    "named": false
+  },
+  {
+    "type": "token_data",
+    "named": false
+  },
+  {
+    "type": "transaction",
+    "named": false
+  },
+  {
+    "type": "transfer",
+    "named": false
+  },
+  {
+    "type": "update",
+    "named": false
+  },
+  {
+    "type": "user_data",
+    "named": false
+  },
+  {
+    "type": "validate",
+    "named": false
+  },
+  {
+    "type": "verify",
+    "named": false
+  },
+  {
+    "type": "where",
+    "named": false
+  },
+  {
+    "type": "whitespace",
+    "named": true,
+    "extra": true
+  },
+  {
+    "type": "will",
+    "named": false
+  },
+  {
+    "type": "with",
+    "named": false
+  },
+  {
+    "type": "withdraw",
+    "named": false
+  },
+  {
+    "type": "without",
+    "named": false
+  }
+]

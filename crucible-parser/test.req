@@ -1,0 +1,5 @@
+User can withdraw money from account if balance >= amount
+System must authenticate user before granting access
+Admin should validate input where length > 0
+API can send message_data to user_data where user_data_is_set == true
+Service shall process transaction where amount > 0 and amount <= balance

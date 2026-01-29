@@ -6,7 +6,7 @@
 [![MIL-SPEC Compliance](https://img.shields.io/badge/MIL--SPEC-Compliant-blue)](docs/MILSPEC_COMPLIANCE_STATUS.md)
 [![Security Hardened](https://img.shields.io/badge/Security-Hardened-green)](SECURITY.md)
 [![Security Hardened](https://img.shields.io/badge/Security-Hardened-green)](SECURITY.md)
-[![Build Status](https://img.shields.io/badge/Build-v0.1.3--alpha-orange)](BUILD_CHECKLIST.md)
+[![Build Status](https://img.shields.io/badge/Build-v0.2.0--alpha-orange)](BUILD_CHECKLIST.md)
 [![License: CEEL](https://img.shields.io/badge/License-CEEL-blue.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=flat&logo=rust&logoColor=white)](https://www.rust-lang.org/)
 [![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -134,14 +134,12 @@ Crucible Engine uses a **4-layer verification pipeline**:
 
 We're building Crucible Engine transparently with weekly updates and public demos.
 
-### Current Phase: Foundation (Weeks 1-4)
+### Current Phase: Phase 2 - Parser Integration (Weeks 5-8)
 
-- [x] Repository setup and documentation
-- [x] C4 architecture design
-- [x] MIL-SPEC documentation process
-- [ ] Tree-Sitter requirement parser
-- [ ] Basic Intent-AST generation
-- [ ] Monaco editor integration
+- [x] Tree-Sitter requirement parser
+- [x] Basic Intent-AST generation
+- [ ] Z3 SMT Solver integration
+- [ ] Basic formal verification
 
 ### Next Milestones
 
