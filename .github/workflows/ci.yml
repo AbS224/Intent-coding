@@ -23,10 +23,8 @@ jobs:
         # Pattern matches: key = "value" or key: "value" where value looks like a secret
         if grep -r -E '(password\s*[:=]\s*["\'][^"\']+["\']|secret\s*[:=]\s*["\'][^"\']+["\']|api[_-]?key\s*[:=]\s*["\'][^"\']+["\']|token\s*[:=]\s*["\'][^"\']+["\'])' \
            --include="*.rs" --include="*.js" --include="*.py" . \
-           --exclude-dir=.github \
-           --exclude="*_test*" --exclude="*_spec*" \
-           --exclude="audit_generator.py" --exclude="milspec_generator.py" \
-           --exclude="z3_constraints.py" --exclude="grammar.js" 2>/dev/null; then
+           --exclude-dir=.github 2>/dev/null | \
+           grep -v "password_data\|token_data\|secrets_status\|secrets_count\|secrets_action\|Generated variables\|Basic tokens\|key exchange\|key derivation\|grep.*-E.*password\|Check for secrets"; then
           echo "❌ Hardcoded secrets detected"
           exit 1
         fi
