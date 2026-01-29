@@ -125,13 +125,31 @@
   - [x] Implement real-time parsing with syntax highlighting
   - [x] Add error detection and reporting
   - [x] Build parser test suite
+  - [x] **Add logical expression parsing (and/or/not)** ✅ NEW
+  - [x] Implement ParsedConstraint enum with compound support
+  - [x] Add parse_logical_expression_node() function
+  - [x] Add parse_arithmetic_node() function
 
 - [ ] **Basic Z3 SMT Solver Integration**
   - [ ] Install Z3 in development environment
-  - [ ] Create basic constraint generation from Intent-AST
+  - [ ] Create z3-rs crate dependency
+  - [ ] **Create constraint-to-Z3 translation layer** ✅ DESIGN COMPLETE
+  - [ ] Implement operator mapping (ConstraintOperator → Z3 expressions)
+  - [ ] Implement compound constraint translation (AND/OR/NOT trees)
   - [ ] Implement simple satisfiability checking
   - [ ] Add proof object output (basic)
   - [ ] Build verification test cases
+
+**Intent-AST to Z3 Mapping:**
+
+```
+Constraint.left_variable → Z3::Int::new(ctx, name)
+Constraint.operator → Z3 comparison function
+Constraint.right_value → Z3::Int::new(ctx, value) or Z3::String::new(ctx, value)
+LogicalOperator::And → Z3::and(&[a, b])
+LogicalOperator::Or → Z3::or(&[a, b])
+LogicalOperator::Not → Z3::not(a)
+```
 
 - [ ] **Enhanced Web Interface**
   - [ ] Add real-time parsing feedback

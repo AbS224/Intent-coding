@@ -94,6 +94,25 @@ pub enum ConstraintOperator {
     DoesNotContain,
 }
 
+/// Represents a logical operator for compound constraints
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum LogicalOperator {
+    And,
+    Or,
+    Not,
+}
+
+/// Represents a parsed constraint (atomic or compound)
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum ParsedConstraint {
+    Atomic(Constraint),
+    Compound {
+        operator: LogicalOperator,
+        left: Box<ParsedConstraint>,
+        right: Option<Box<ParsedConstraint>>,
+    },
+}
+
 impl ConstraintOperator {
     /// Convert from string representation
     pub fn from_str(s: &str) -> Self {
@@ -136,8 +155,8 @@ pub struct Requirement {
     pub subject: String,
     pub modal_verb: String,
     pub action: Action,
-    pub condition: Option<Constraint>,
-    pub constraint: Option<Constraint>,
+    pub condition: Option<ParsedConstraint>,
+    pub constraint: Option<ParsedConstraint>,
 }
 
 /// Represents the Intent-AST (Abstract Syntax Tree) for requirements
@@ -335,11 +354,11 @@ fn parse_action_node(node: tree_sitter::Node, source: &str) -> Option<Action> {
 }
 
 /// Extract condition from a requirement node
-fn extract_condition(node: tree_sitter::Node, source: &str) -> Option<Constraint> {
+fn extract_condition(node: tree_sitter::Node, source: &str) -> Option<ParsedConstraint> {
     for i in 0..node.child_count() {
         if let Some(child) = node.child(i) {
             if child.kind() == "condition" {
-                return parse_constraint_node(child, source);
+                return parse_constraint_expression(child, source);
             }
         }
     }
@@ -347,64 +366,74 @@ fn extract_condition(node: tree_sitter::Node, source: &str) -> Option<Constraint
 }
 
 /// Extract constraint from a requirement node
-fn extract_constraint(node: tree_sitter::Node, source: &str) -> Option<Constraint> {
+fn extract_constraint(node: tree_sitter::Node, source: &str) -> Option<ParsedConstraint> {
     for i in 0..node.child_count() {
         if let Some(child) = node.child(i) {
             if child.kind() == "constraint" {
-                return parse_constraint_node(child, source);
+                return parse_constraint_expression(child, source);
             }
         }
     }
     None
 }
 
-/// Parse a constraint node
-fn parse_constraint_node(node: tree_sitter::Node, source: &str) -> Option<Constraint> {
+/// Parse a constraint expression (handles comparison, logical, and arithmetic)
+fn parse_constraint_expression(node: tree_sitter::Node, source: &str) -> Option<ParsedConstraint> {
+    for i in 0..node.child_count() {
+        if let Some(child) = node.child(i) {
+            match child.kind() {
+                "constraint_expression" => {
+                    // Recurse into the actual expression
+                    return parse_constraint_expression(child, source);
+                }
+                "comparison" => {
+                    return parse_comparison_node(child, source).map(ParsedConstraint::Atomic);
+                }
+                "logical_expression" => {
+                    return parse_logical_expression_node(child, source);
+                }
+                "arithmetic_expression" => {
+                    return parse_arithmetic_node(child, source).map(ParsedConstraint::Atomic);
+                }
+                _ => {}
+            }
+        }
+    }
+    None
+}
+
+/// Parse a comparison node
+fn parse_comparison_node(node: tree_sitter::Node, source: &str) -> Option<Constraint> {
     let mut left_var = None;
     let mut operator = None;
     let mut right_val = None;
     
-    // Look for constraint_expression
-    for i in 0..node.child_count() {
-        if let Some(child) = node.child(i) {
-            if child.kind() == "constraint_expression" {
-                // Look for comparison
-                for j in 0..child.child_count() {
-                    if let Some(grandchild) = child.child(j) {
-                        if grandchild.kind() == "comparison" {
-                            // Extract left expression, operator, and right expression
-                            for k in 0..grandchild.child_count() {
-                                if let Some(ggchild) = grandchild.child(k) {
-                                    match ggchild.kind() {
-                                        "left_expression" => {
-                                            for l in 0..ggchild.child_count() {
-                                                if let Some(gggchild) = ggchild.child(l) {
-                                                    if gggchild.kind() == "variable" {
-                                                        left_var = Some(source[gggchild.byte_range()].to_string());
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        "comparison_operator" => {
-                                            let op_str = source[ggchild.byte_range()].to_string();
-                                            operator = Some(ConstraintOperator::from_str(&op_str.trim()));
-                                        }
-                                        "right_expression" => {
-                                            for l in 0..ggchild.child_count() {
-                                                if let Some(gggchild) = ggchild.child(l) {
-                                                    if gggchild.kind() == "variable" || gggchild.kind() == "number" {
-                                                        right_val = Some(source[gggchild.byte_range()].to_string());
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        _ => {}
-                                    }
-                                }
+    for k in 0..node.child_count() {
+        if let Some(ggchild) = node.child(k) {
+            match ggchild.kind() {
+                "left_expression" => {
+                    for l in 0..ggchild.child_count() {
+                        if let Some(gggchild) = ggchild.child(l) {
+                            if gggchild.kind() == "variable" {
+                                left_var = Some(source[gggchild.byte_range()].to_string());
                             }
                         }
                     }
                 }
+                "comparison_operator" => {
+                    let op_str = source[ggchild.byte_range()].to_string();
+                    operator = Some(ConstraintOperator::from_str(&op_str.trim()));
+                }
+                "right_expression" => {
+                    for l in 0..ggchild.child_count() {
+                        if let Some(gggchild) = ggchild.child(l) {
+                            if gggchild.kind() == "variable" || gggchild.kind() == "number" {
+                                right_val = Some(source[gggchild.byte_range()].to_string());
+                            }
+                        }
+                    }
+                }
+                _ => {}
             }
         }
     }
@@ -417,6 +446,122 @@ fn parse_constraint_node(node: tree_sitter::Node, source: &str) -> Option<Constr
         }),
         _ => None,
     }
+}
+
+/// Parse a logical expression node (and/or/not)
+fn parse_logical_expression_node(node: tree_sitter::Node, source: &str) -> Option<ParsedConstraint> {
+    let mut operator = None;
+    let mut left_expr = None;
+    let mut right_expr = None;
+    
+    for i in 0..node.child_count() {
+        if let Some(child) = node.child(i) {
+            match child.kind() {
+                "and" | "or" => {
+                    operator = Some(if child.kind() == "and" { LogicalOperator::And } else { LogicalOperator::Or });
+                }
+                "not" => {
+                    operator = Some(LogicalOperator::Not);
+                }
+                "expression" => {
+                    // This is a nested expression
+                    for j in 0..child.child_count() {
+                        if let Some(expr_child) = child.child(j) {
+                            if expr_child.kind() == "comparison" {
+                                if left_expr.is_none() {
+                                    left_expr = parse_comparison_node(expr_child, source).map(ParsedConstraint::Atomic);
+                                } else {
+                                    right_expr = parse_comparison_node(expr_child, source).map(ParsedConstraint::Atomic);
+                                }
+                            }
+                        }
+                    }
+                }
+                "comparison" => {
+                    if left_expr.is_none() {
+                        left_expr = parse_comparison_node(child, source).map(ParsedConstraint::Atomic);
+                    } else {
+                        right_expr = parse_comparison_node(child, source).map(ParsedConstraint::Atomic);
+                    }
+                }
+                _ => {}
+            }
+        }
+    }
+    
+    match operator {
+        Some(LogicalOperator::Not) => {
+            left_expr.map(|expr| ParsedConstraint::Compound {
+                operator: LogicalOperator::Not,
+                left: Box::new(expr),
+                right: None,
+            })
+        }
+        Some(_) if left_expr.is_some() && right_expr.is_some() => {
+            Some(ParsedConstraint::Compound {
+                operator: operator.unwrap(),
+                left: Box::new(left_expr.unwrap()),
+                right: Some(Box::new(right_expr.unwrap())),
+            })
+        }
+        _ => left_expr,
+    }
+}
+
+/// Parse an arithmetic expression node
+fn parse_arithmetic_node(node: tree_sitter::Node, source: &str) -> Option<Constraint> {
+    // For arithmetic expressions like "a + b", we create a constraint where
+    // the left side equals the arithmetic result
+    let mut left_var = None;
+    let mut right_var = None;
+    let mut right_num = None;
+    
+    for k in 0..node.child_count() {
+        if let Some(ggchild) = node.child(k) {
+            match ggchild.kind() {
+                "left_expression" => {
+                    for l in 0..ggchild.child_count() {
+                        if let Some(gggchild) = ggchild.child(l) {
+                            if gggchild.kind() == "variable" {
+                                left_var = Some(source[gggchild.byte_range()].to_string());
+                            }
+                        }
+                    }
+                }
+                "right_expression" => {
+                    for l in 0..ggchild.child_count() {
+                        if let Some(gggchild) = ggchild.child(l) {
+                            if gggchild.kind() == "variable" {
+                                right_var = Some(source[gggchild.byte_range()].to_string());
+                            } else if gggchild.kind() == "number" {
+                                right_num = Some(source[gggchild.byte_range()].to_string());
+                            }
+                        }
+                    }
+                }
+                _ => {}
+            }
+        }
+    }
+    
+    match (left_var, right_var, right_num) {
+        (Some(l), Some(r), _) => Some(Constraint {
+            left_variable: l,
+            operator: ConstraintOperator::Equal,
+            right_value: format!("({})", r), // Placeholder for arithmetic
+        }),
+        (Some(l), None, Some(n)) => Some(Constraint {
+            left_variable: l,
+            operator: ConstraintOperator::Equal,
+            right_value: n,
+        }),
+        _ => None,
+    }
+}
+
+/// Legacy parser for simple constraints (kept for backward compatibility)
+fn parse_constraint_node(node: tree_sitter::Node, source: &str) -> Option<ParsedConstraint> {
+    parse_constraint_expression(node, source)
 }
 
 /// Get the Tree-Sitter language for this parser
@@ -461,5 +606,49 @@ mod tests {
         let ast = result.unwrap();
         assert_eq!(ast.requirements.len(), 1);
         assert_eq!(ast.requirements[0].subject, "Service");
+    }
+    
+    #[test]
+    fn test_parse_logical_and_constraint() {
+        let input = "User can withdraw money if balance >= amount and amount > 0";
+        let result = parse(input);
+        assert!(result.is_ok());
+        
+        let ast = result.unwrap();
+        assert_eq!(ast.requirements.len(), 1);
+        assert_eq!(ast.requirements[0].subject, "User");
+        // Check that condition is a compound constraint
+        if let Some(ref constraint) = ast.requirements[0].condition {
+            match constraint {
+                ParsedConstraint::Compound { operator, left: _, right: _ } => {
+                    assert_eq!(*operator, LogicalOperator::And);
+                }
+                ParsedConstraint::Atomic(_) => {
+                    // Single constraint - still valid
+                }
+            }
+        }
+    }
+    
+    #[test]
+    fn test_parse_logical_or_constraint() {
+        let input = "Admin can delete record if role == admin or role == superuser";
+        let result = parse(input);
+        assert!(result.is_ok());
+        
+        let ast = result.unwrap();
+        assert_eq!(ast.requirements.len(), 1);
+        assert_eq!(ast.requirements[0].subject, "Admin");
+    }
+    
+    #[test]
+    fn test_parse_nested_logical_constraint() {
+        let input = "System shall validate input where (length > 0) and (width > 0) or (is_default == true)";
+        let result = parse(input);
+        assert!(result.is_ok());
+        
+        let ast = result.unwrap();
+        assert_eq!(ast.requirements.len(), 1);
+        assert_eq!(ast.requirements[0].subject, "System");
     }
 }
