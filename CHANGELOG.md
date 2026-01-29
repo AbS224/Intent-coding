@@ -1,4 +1,5 @@
 # Crucible Engine Changelog
+
 ## "Correct by Design, Not by Debugging"
 
 All notable changes to this project will be documented in this file.
@@ -8,14 +9,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.4-alpha] - 2026-01-29
+
 ### Added
-- Tree-Sitter parser integration preparation
-- Z3 SMT solver infrastructure
-- Enhanced parser visualization documentation
+
+- **Tree-Sitter Parser Integration**: Complete natural language requirement parser
+  - Grammar for natural language requirements
+  - Real-time parsing with syntax highlighting
+  - Error detection and reporting
+  - Comprehensive parser test suite
+- **Logical Expression Parsing**: Full support for and/or/not operators
+  - `ParsedConstraint` enum with compound constraint support
+  - `parse_logical_expression_node()` function for complex conditions
+  - `parse_arithmetic_node()` function for numeric expressions
+- **Z3 SMT Solver Integration Infrastructure**: Constraint-to-Z3 translation layer design
+  - Operator mapping (ConstraintOperator → Z3 expressions)
+  - Compound constraint translation (AND/OR/NOT trees)
+  - Satisfiability checking framework
+
+### Changed
+
+- **Parser Performance**: Optimized AST generation for real-time feedback
+- **Error Handling**: Enhanced error reporting with detailed location information
+- **Documentation**: Updated parser logic diagrams with logical expression examples
+
+### Technical
+
+- **Intent-AST to Z3 Mapping**: Complete translation specification documented
+  - Constraint.left_variable → Z3::Int::new(ctx, name)
+  - LogicalOperator::And → Z3::and(&[a, b])
+  - LogicalOperator::Or → Z3::or(&[a, b])
+  - LogicalOperator::Not → Z3::not(a)
 
 ## [0.1.3-alpha] - 2026-01-20
 
 ### Added
+
 - **Local CI/CD System**: Complete Podman-based CI pipeline replacing GitHub Actions
 - **MIL-SPEC Push Gatekeeper**: Token-based security review system with 1-hour expiration
 - **Audit Trail System**: Automated compliance report generation for build-in-public transparency
@@ -27,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Comprehensive FAQ**: Covering bootstrap development and troubleshooting
 
 ### Changed
+
 - **README Badges**: Updated to show local CI status instead of broken GitHub Actions
 - **Infrastructure Positioning**: Reframed as "sovereign infrastructure" rather than billing issue
 - **Security Token System**: Migrated from `.milspec-unlock` to `.push_token` with expiration
@@ -34,23 +64,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Documentation Structure**: Added visual parser logic documentation with Mermaid diagrams
 
 ### Fixed
+
 - **Git Hook Permissions**: Proper Windows/WSL executable permissions for all scripts
 - **Token Validation**: Single-use tokens with proper expiration and cleanup
 - **Audit Logging**: Complete traceability for all push authorizations
 - **Container Security**: Rootless Podman execution for enhanced security
 
 ### Security
+
 - **Zero External Dependencies**: Complete independence from paid cloud services
 - **Enhanced Audit Trail**: Every CI run logged with timestamps and build hashes
 - **Token-Based Authorization**: 1-hour expiration with single-use consumption
 - **Build Verification**: SHA-256 hashing of all artifacts for integrity verification
 
 ### Performance
+
 - **Local CI Speed**: 300% faster than cloud-based GitHub Actions
 - **Memory Optimization**: WSL configured for heavy Z3 workloads
 - **Container Efficiency**: Rootless Podman with optimized build caching
 
 ### Documentation
+
 - **Parser Logic Visualization**: Complete Mermaid diagrams showing NL → Formal Logic transformation
 - **Audit Report Templates**: MIL-SPEC compliant compliance documentation
 - **Bootstrap Guide**: Enterprise development on zero budget
@@ -59,6 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.2-alpha] - 2026-01-20
 
 ### Security
+
 - **25 Vulnerabilities Fixed**: Complete security remediation (100% reduction)
 - **CSRF Protection**: Token-based validation for all state-changing requests
 - **XSS Prevention**: HTML escaping and input sanitization with Bleach
@@ -66,6 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Error Handling**: Comprehensive exception handling across all languages
 
 ### Added
+
 - **Security Configuration**: `.security.env` with enterprise security settings
 - **Python Security Dependencies**: werkzeug, bleach for XSS/path protection
 - **Enhanced Error Handling**: Null checks, try-catch blocks, graceful degradation
@@ -73,6 +109,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Timezone-Aware Datetime**: Consistent timestamp handling across systems
 
 ### Changed
+
 - **Hardcoded Paths**: Replaced with dynamic path resolution
 - **Environment Variables**: Configuration externalized for security
 - **Shell Script Quoting**: Proper command substitution quoting
@@ -81,6 +118,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.1-alpha] - 2026-01-19
 
 ### Added
+
 - **MIL-SPEC Documentation Generator**: Automated SRD, SDD, SECD, TPD generation
 - **Compliance Framework**: ISO 26262, DO-178C, Common Criteria EAL4+ alignment
 - **Version Control System**: Complete change management with audit trails
@@ -90,6 +128,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0-alpha] - 2026-01-19
 
 ### Added
+
 - **Foundation Infrastructure**: Complete Rust workspace with multi-crate architecture
 - **Intent-AST Core**: Basic requirement parsing and AST generation
 - **Web Interface**: Glassmorphic UI with requirement input and visualization
@@ -98,6 +137,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Documentation Framework**: MIL-SPEC documentation automation
 
 ### Infrastructure
+
 - **Rust Workspace**: Multi-crate architecture for modular development
 - **Docker Containerization**: Development environment standardization
 - **WSL/Windows Bridge**: Cross-platform development support
@@ -108,6 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Numbering
 
 Crucible Engine follows semantic versioning with the following scheme:
+
 - **MAJOR**: Incompatible API changes or architectural shifts
 - **MINOR**: New functionality in a backwards compatible manner
 - **PATCH**: Backwards compatible bug fixes

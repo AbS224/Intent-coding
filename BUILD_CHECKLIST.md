@@ -2,7 +2,7 @@
 
 ## "Correct by Design, Not by Debugging" - FOUNDATION COMPLETE
 
-**Current Status**: v0.1.3-alpha (January 29, 2026)
+**Current Status**: v0.1.4-alpha (January 29, 2026)
 **Phase**: PHASE 2 IN PROGRESS - Tree-Sitter Parser Integration
 **Next Milestone**: v0.2.0-alpha Parser Integration (February 15, 2026)
 
