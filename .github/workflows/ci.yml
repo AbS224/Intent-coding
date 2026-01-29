@@ -19,13 +19,19 @@ jobs:
     - name: Secret Detection
       run: |
         echo "🔍 Scanning for secrets..."
-        # Look for actual hardcoded secrets (not variable names)
+        # Create a script to scan for secrets without false positives
+        cat > /tmp/scan_secrets.sh << 'EOF'
+        #!/bin/bash
         # Pattern matches: key = "value" or key: "value" where value looks like a secret
-        if grep -r -E '(password\s*[:=]\s*["\'][^"\']+["\']|secret\s*[:=]\s*["\'][^"\']+["\']|api[_-]?key\s*[:=]\s*["\'][^"\']+["\']|token\s*[:=]\s*["\'][^"\']+["\'])' \
+        grep -r -E 'password\s*[:=]\s*["\'][^"\']+["\']|secret\s*[:=]\s*["\'][^"\']+["\']|api[_-]?key\s*[:=]\s*["\'][^"\']+["\']|token\s*[:=]\s*["\'][^"\']+["\']' \
            --include="*.rs" --include="*.js" --include="*.py" . \
            --exclude-dir=.github 2>/dev/null | \
-           grep -v "password_data\|token_data\|secrets_status\|secrets_count\|secrets_action\|Generated variables\|Basic tokens\|key exchange\|key derivation\|grep.*-E.*password\|Check for secrets"; then
+           grep -v "password_data\|token_data\|secrets_status\|secrets_count\|secrets_action\|Generated variables\|Basic tokens\|key exchange\|key derivation\|grep.*password\|Check for secrets" || true
+        EOF
+        chmod +x /tmp/scan_secrets.sh
+        if [ -n "$(/tmp/scan_secrets.sh)" ]; then
           echo "❌ Hardcoded secrets detected"
+          /tmp/scan_secrets.sh
           exit 1
         fi
         echo "✅ No secrets found"
