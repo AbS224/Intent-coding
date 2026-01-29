@@ -1,8 +1,10 @@
 # Crucible Engine
+
 ## "Correct by Design, Not by Debugging"
 
 [![Local CI Status](https://img.shields.io/badge/Local_CI-Passing-brightgreen)](LOCAL_CI_README.md)
-[![MIL-SPEC Audit](https://img.shields.io/badge/Audit-Certified-blue)](audits/)
+[![MIL-SPEC Compliance](https://img.shields.io/badge/MIL--SPEC-Compliant-blue)](docs/MILSPEC_COMPLIANCE_STATUS.md)
+[![Security Hardened](https://img.shields.io/badge/Security-Hardened-green)](SECURITY.md)
 [![Security Hardened](https://img.shields.io/badge/Security-Hardened-green)](SECURITY.md)
 [![Build Status](https://img.shields.io/badge/Build-v0.1.3--alpha-orange)](BUILD_CHECKLIST.md)
 [![License: CEEL](https://img.shields.io/badge/License-CEEL-blue.svg)](LICENSE)
@@ -39,7 +41,7 @@ Crucible Engine is a **vibecoding platform** that eliminates debugging by genera
 
 ### Prerequisites
 
-- Rust 1.70+ 
+- Rust 1.70+
 - Node.js 18+
 - Docker & Docker Compose
 - Git
@@ -65,6 +67,7 @@ cargo run
 ### Your First Verified System
 
 1. **Write Requirements** (Natural Language)
+
 ```markdown
 User can withdraw money from account
 Withdrawal amount must be positive
@@ -72,12 +75,14 @@ Account balance must be sufficient
 Transaction must be atomic
 ```
 
-2. **Crucible Verifies** (Automatic)
+1. **Crucible Verifies** (Automatic)
+
 - Structural analysis detects gaps
 - Formal verification proves correctness
 - AI suggests improvements
 
-3. **Generate Code** (Production-Ready)
+1. **Generate Code** (Production-Ready)
+
 ```rust
 // Generated Rust code with formal verification annotations
 #[verified(invariant = "balance >= 0")]
@@ -100,21 +105,25 @@ impl Account {
 Crucible Engine uses a **4-layer verification pipeline**:
 
 ### 1. **Intake Layer**: Natural Language → Intent-AST
+
 - Tree-Sitter parsing for structural analysis
 - Real-time gap detection and suggestions
 - ANNIE AI assistant for requirement refinement
 
 ### 2. **Thunderdome**: AI Battle Arena
+
 - **Blue Team**: Logic verification with multiple AI models
 - **Red Team**: Adversarial testing and vulnerability detection
 - **Judge**: Consensus-based correctness validation
 
 ### 3. **Verification Engine**: Mathematical Proofs
+
 - Z3 SMT solver for constraint satisfaction
 - Prolog policy engine for security rules
 - SPARK/Ada formal verification integration
 
 ### 4. **Code Generation**: Correct-by-Construction
+
 - Multi-language support (Rust, SPARK/Ada, Zig, Elixir)
 - Proof-carrying code with runtime assertions
 - Post-quantum cryptographic signatures
@@ -126,6 +135,7 @@ Crucible Engine uses a **4-layer verification pipeline**:
 We're building Crucible Engine transparently with weekly updates and public demos.
 
 ### Current Phase: Foundation (Weeks 1-4)
+
 - [x] Repository setup and documentation
 - [x] C4 architecture design
 - [x] MIL-SPEC documentation process
@@ -134,6 +144,7 @@ We're building Crucible Engine transparently with weekly updates and public demo
 - [ ] Monaco editor integration
 
 ### Next Milestones
+
 - **Week 4**: Public demo of requirement parsing and structural analysis
 - **Week 8**: AI-powered formal verification
 - **Week 12**: Production-ready code generation
@@ -148,6 +159,7 @@ We're building Crucible Engine transparently with weekly updates and public demo
 Crucible Engine is designed for **enterprise and regulated environments**:
 
 ### Compliance Standards
+
 - **ISO 26262**: Functional safety for automotive systems
 - **DO-178C**: Software airworthiness for aviation
 - **Common Criteria EAL4+**: Security evaluation
@@ -155,6 +167,7 @@ Crucible Engine is designed for **enterprise and regulated environments**:
 - **SOX Compliance**: Financial system controls
 
 ### Security Features
+
 - **Post-Quantum Cryptography**: ML-KEM/ML-DSA signatures
 - **Immutable Audit Trails**: Cryptographically signed action logs
 - **Zero Trust Architecture**: All communications encrypted and authenticated
@@ -169,22 +182,22 @@ Crucible Engine is designed for **enterprise and regulated environments**:
 We welcome contributions from the community! Here's how to get involved:
 
 ### Development Process
+
 1. **Fork** the repository
 2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
 3. **Follow** our [MIL-SPEC documentation standards](docs/MILSPEC_DOCUMENTATION.md)
 4. **Submit** a pull request with formal verification tests
 
 ### Areas We Need Help
+
 - **Formal Methods**: Z3 constraint generation, SPARK/Ada integration
 - **AI/ML**: Adversarial testing algorithms, requirement analysis
 - **Frontend**: React/TypeScript, D3.js visualizations
 - **Security**: Post-quantum cryptography, compliance automation
 
 ### Code of Conduct
-- All code must pass formal verification
-- Documentation follows MIL-STD-498 standards
-- Security-first development approach
-- Respectful and inclusive community
+
+This project follows our [Code of Conduct](CODE_OF_CONDUCT.md). Please be respectful and inclusive in all interactions.
 
 ---
 
@@ -193,6 +206,7 @@ We welcome contributions from the community! Here's how to get involved:
 Crucible Engine is committed to accessibility for all developers. We follow WCAG 2.2 guidelines and prioritize inclusive design:
 
 ### Features
+
 - **Screen Reader Compatible**: All documentation uses semantic structure
 - **High Contrast Support**: Code examples and UI designed for visibility
 - **Keyboard Navigation**: Full keyboard access to all features
@@ -200,6 +214,7 @@ Crucible Engine is committed to accessibility for all developers. We follow WCAG
 - **Automated Checks**: Local CI includes accessibility validation
 
 ### Our Standards
+
 - **WCAG 2.2 AA** compliance for web interfaces
 - **Section 508** compliance for documentation
 - **Inclusive Design** principles throughout development
@@ -237,7 +252,7 @@ Crucible Engine provides **measurable improvements** over traditional developmen
 - **🤝 Contributing**: [CONTRIBUTING.md](CONTRIBUTING.md)
 - **✅ Quality Assurance**: [QA_CHECKLIST.md](QA_CHECKLIST.md)
 - **🌐 Academic Website**: [verifiableproof.systems](https://verifiableproof.systems)
-- **🔬 ORCID Profile**: [0000-0000-0000-0000](https://orcid.org/0000-0000-0000-0000)
+- **🔬 ORCID Profile**: [Coming Soon](https://orcid.org)
 - **🐛 Issues**: [GitHub Issues](https://github.com/AbS224/Intent-coding/issues)
 - **💬 Discussions**: [GitHub Discussions](https://github.com/AbS224/Intent-coding/discussions)
 - **📧 Contact**: [abs224@users.noreply.github.com](mailto:abs224@users.noreply.github.com)
@@ -249,6 +264,7 @@ Crucible Engine provides **measurable improvements** over traditional developmen
 This project is licensed under the **Crucible Engine Educational License (CEEL) v1.0** - see the [LICENSE](LICENSE) file for details.
 
 ### License Summary
+
 - ✅ **Educational Use**: Free for learning, research, and academic purposes
 - ✅ **Non-Commercial**: Free for personal experimentation and development
 - ✅ **Contributing**: Encouraged and welcomed under the same terms
